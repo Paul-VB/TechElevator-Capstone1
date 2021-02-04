@@ -1,4 +1,6 @@
 ﻿using Capstone.CLI;
+using Capstone.Models;
+using Capstone.Models.VendingMachineItems;
 using System;
 
 namespace Capstone
@@ -20,11 +22,16 @@ namespace Capstone
         {
             // You may want to create some objects to get the whole process started here...
 
+            VendingMachineItem v = new Candy("Snickers");
+            Console.WriteLine($"the fully qualified type name of v is {v.GetType()}");
+
+            //VendingMachineSlot s = new VendingMachineSlot("Hershey's", 2.00m, Type.GetType("Capstone.Models."+thingFromFile));
+
 
             // Some objects could be passed into the menu constructor, so that the menu has something to 
             // perform its actions against....
-            MainMenu mainMenu = new MainMenu();
-            mainMenu.Show();
+            //MainMenu mainMenu = new MainMenu();
+            //mainMenu.Show();
         }
     }
 }
