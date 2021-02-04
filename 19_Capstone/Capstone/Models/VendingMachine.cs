@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace Capstone.Models
@@ -29,7 +30,17 @@ namespace Capstone.Models
             List<string> returnList = new List<string>();
 
             //do things
+            using (StreamReader rdr = new StreamReader(pathToStockFile))
+            {
 
+                while (!rdr.EndOfStream)
+                {
+                    string line = rdr.ReadLine();
+
+                    returnList.Add(line);
+                }
+
+            }
             return returnList;
         }
 
