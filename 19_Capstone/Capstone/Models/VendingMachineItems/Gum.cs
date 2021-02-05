@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Capstone.Models.VendingMachineItems
 {
-    class Gum : VendingMachineItem
+    public class Gum : VendingMachineItem
     {
         public override string EatMessage { get { return "Chew Chew, Yum!"; } }
 
