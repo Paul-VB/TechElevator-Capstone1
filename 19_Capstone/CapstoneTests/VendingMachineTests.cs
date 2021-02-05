@@ -155,7 +155,7 @@ namespace CapstoneTests
                     { CoinGroup.Dime,2 },
                     { CoinGroup.Quarter,16 }
                 },
-                    DisplayName: "0P, 0N, 2D, 16Q");
+                    DisplayName: "0P, 0N, 2D, 16Q");//reverse coinstar
 
 
         }
@@ -176,6 +176,7 @@ namespace CapstoneTests
             {
                 Assert.AreEqual(expectedChange[group], resultChange[group].Count, $"{DisplayName} test failed!: Quantity of {group} is incorrect!");
             }
+            Assert.AreEqual(0, testMachine.CurrentCredit, "There is still credit left in the machine! the customer didn't get all their change back!");
 
         }
     }

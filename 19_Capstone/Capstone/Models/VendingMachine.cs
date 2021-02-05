@@ -10,7 +10,8 @@ namespace Capstone.Models
 {
     public class VendingMachine
     {
-
+        const string STOCKFILEPATH = @"..\..\..\..\vendingmachine.csv";
+        const string AUDITFILEPATH = @"..\..\..\..\Log.txt";
         #region Properties
         /// <summary>
         /// a private backing field for Slots
@@ -42,8 +43,9 @@ namespace Capstone.Models
         /// </summary>
         /// <param name="pathToStockFile">The path to the input file.</param>
         /// <returns>The lines of the file as a List of strings</returns>
-        public List<string> ReadStockFile(string pathToStockFile)
+        public List<string> ReadStockFile(string pathToStockFile = STOCKFILEPATH)
         {
+            decimal startCredit = CurrentCredit;
             //the list we will return
             List<string> returnList = new List<string>();
 
@@ -58,6 +60,8 @@ namespace Capstone.Models
                 }
 
             }
+
+            LogToAuditFile("Read Stock File",startCredit, CurrentCredit);
             return returnList;
         }
 
@@ -69,6 +73,7 @@ namespace Capstone.Models
         /// <param name="stockLines">a list of strings representing the vendingMachineSlots</param>
         public void Restock(List<string> stockLines)
         {
+            decimal startCredit = CurrentCredit;
             //loop though each item in the stockLines
             foreach (string currLine in stockLines)
             {
@@ -100,22 +105,22 @@ namespace Capstone.Models
                 }
                 catch (InvalidTypeException)
                 {
-                    //todo: log the error to a file. the category in the stock file was misspelled maybe?
+                    LogToAuditFile("Bad StockFile line! the category in the stock file may have been misspelled", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (NullReferenceException)
                 {
-                    //todo, Log that the stock line was null. I have no idea HOW it might be null, but if it is null, we'll handle it
+                    LogToAuditFile("Bad StockFile line! (this really shouldn't be possible, but the stock file line was null)", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (FormatException)
                 {
-                    //todo. log to the file that the stockFile was malformed. Is the price an actual number?
+                    LogToAuditFile("Bad StockFile line! Is the price an actual number?", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    //todo: Log to the file that the stock line had too few vertical bars
+                    LogToAuditFile("Bad StockFile line! Is there the correct number of vertical bars in the line?", startCredit, CurrentCredit);
                     continue;
                 }
 
@@ -136,9 +141,11 @@ namespace Capstone.Models
         public List<string> GetInventory()
         {
             List<string> returnlist = new List<string>();
+            returnlist.Add("Slot | Remaining |  Cost  | Item Name");
+            returnlist.Add("-----+-----------+--------+----------");
             foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
             {
-                returnlist.Add($"{kvp.Key}\t{kvp.Value.ToString()}");
+                returnlist.Add($" {kvp.Key}  | {kvp.Value.ToString()}");
             }
             return returnlist;
         }
@@ -155,6 +162,8 @@ namespace Capstone.Models
         /// <returns></returns>
         public VendingMachineItem DispenseItem(string slotIdentifier)
         {
+            decimal startCredit = CurrentCredit;
+            slotIdentifier = slotIdentifier.ToUpper();
             try
             {
                 VendingMachineSlot slot = this.slots[slotIdentifier];
@@ -169,10 +178,9 @@ namespace Capstone.Models
             }
             catch (KeyNotFoundException e)//thrown if the slot not exists
             {
-                //todo: log that the user entered an invalid keytag
+                LogToAuditFile($"Bad User Input! User tried to select invalid slot {slotIdentifier}", startCredit, CurrentCredit);
                 throw e;
             }
-            //catch not enouyh money
             catch (InvalidOperationException e)//thrown if the slot is empty
             {
                 //todo: log that the user tried to buy a slot that was sold out
@@ -220,6 +228,24 @@ namespace Capstone.Models
                 }
             }
             return change;
+        }
+
+        /// <summary>
+        /// Logs events to the audit file
+        /// </summary>
+        /// <param name="eventDescription">The event description.</param>
+        /// <param name="startCredit">The start credit.</param>
+        /// <param name="endCredit">The end credit.</param>
+        /// <returns></returns>
+        /// <autogeneratedoc />
+        /// TODO Edit XML Comment Template for 
+        private void LogToAuditFile(string eventDescription, decimal startCredit, decimal endCredit)
+        {
+            using (StreamWriter writer = new StreamWriter(AUDITFILEPATH,true))
+            {
+                string logEvent = $"{DateTime.Now} \t {eventDescription} \t {startCredit:c} \t {endCredit}";
+                writer.WriteLine(logEvent);
+            }
         }
         #endregion
 

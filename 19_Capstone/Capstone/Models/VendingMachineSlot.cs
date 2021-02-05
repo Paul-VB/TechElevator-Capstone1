@@ -90,7 +90,7 @@ namespace Capstone.Models
 
         public override string ToString()
         {
-            return String.Format("{0,20} | {1,-8:c} | {2,-15}", this.ItemName, this.Price, this.ItemCategory);
+            return String.Format("{0,9} | {1,6:c} | {2,-15}", this.Count, this.Price, this.ItemName);
         }
     }
 }

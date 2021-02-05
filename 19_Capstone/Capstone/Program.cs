@@ -10,7 +10,7 @@ namespace Capstone
 {
     class Program
     {
-        const string STOCKFILEPATH = @"..\..\..\..\vendingmachine.csv";
+
         /****************************************************************************************
          * Notes on this Capstone solution:
          *      This solution contains both a project for the Vending Machine program (Capstone)
@@ -26,23 +26,12 @@ namespace Capstone
         {
             // You may want to create some objects to get the whole process started here...
             VendingMachine machine = new VendingMachine();
-
-            machine.Restock(machine.ReadStockFile(STOCKFILEPATH));
-
-
-            machine.TakeMoney(4.69m);
-            Dictionary<CoinGroup,List<Coin>>Change = machine.GiveChange();
-
-            foreach(CoinGroup group in Change.Keys)
-            {
-                Console.WriteLine($"we will need {Change[group].Count} {group}s");
-            }
-
-
+            List<string> stockFileLines = machine.ReadStockFile();
+            machine.Restock(stockFileLines);//restock the machine
             // Some objects could be passed into the menu constructor, so that the menu has something to 
             // perform its actions against....
-            //MainMenu mainMenu = new MainMenu();
-            //mainMenu.Show();
+            MainMenu mainMenu = new MainMenu(machine);
+            mainMenu.Show();
         }
     }
 }

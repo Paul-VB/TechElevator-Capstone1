@@ -1,4 +1,5 @@
-﻿using MenuFramework;
+﻿using Capstone.Models;
+using MenuFramework;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,7 @@ namespace Capstone.CLI
 {
     public class MainMenu : ConsoleMenu
     {
+        private VendingMachine machine;
         /*******************************************************************************
          * Private data:
          * Usually, a menu has to hold a reference to some type of "business objects",
@@ -16,33 +18,42 @@ namespace Capstone.CLI
          * ****************************************************************************/
 
         // NOTE: This constructor could be changed to accept arguments needed by the menu
-        public MainMenu()
+        public MainMenu(VendingMachine machine)
         {
+            this.machine = machine;//initialize the vending machine
+
+
             // Add Sample menu options
-            AddOption("Greeting", Greeting, "G");
-            AddOption("Show the Time", GetTime, "T");
+            AddOption("Display Vending Machine Items", DisplayItems, "D");
+            AddOption("Purchase Items", PurchaseMenu, "P");
             AddOption("Quit", Close, "Q");
 
             Configure(cfg =>
            {
                cfg.ItemForegroundColor = ConsoleColor.Cyan;
-               cfg.MenuSelectionMode = MenuSelectionMode.KeyString; // KeyString: User types a key, Arrow: User selects with arrow
+               cfg.SelectedItemForegroundColor = ConsoleColor.Yellow;
+               cfg.MenuSelectionMode = MenuSelectionMode.Arrow; // KeyString: User types a key, Arrow: User selects with arrow
                cfg.KeyStringTextSeparator = ": ";
                cfg.Title = "Main Menu";
            });
         }
 
-        private MenuOptionResult GetTime()
+
+
+        private MenuOptionResult DisplayItems()
         {
-            Console.WriteLine($"The time is {DateTime.Now}");
+            foreach(string itemLine in this.machine.GetInventory())
+            {
+                Console.WriteLine(itemLine);
+            }
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
-        private MenuOptionResult Greeting()
+        private MenuOptionResult PurchaseMenu()
         {
-            string name = GetString("What is your name? ");
-            Console.WriteLine($"Hello, {name}!");
-            return MenuOptionResult.WaitAfterMenuSelection;
+            PurchaseMenu purchaseMenu = new PurchaseMenu(this.machine);
+            purchaseMenu.Show();
+            return MenuOptionResult.DoNotWaitAfterMenuSelection;
         }
     }
 }
