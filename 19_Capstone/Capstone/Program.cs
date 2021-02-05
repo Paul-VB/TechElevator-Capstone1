@@ -7,6 +7,7 @@ namespace Capstone
 {
     class Program
     {
+        const string STOCKFILEPATH = @"..\..\..\..\vendingmachine.csv";
         /****************************************************************************************
          * Notes on this Capstone solution:
          *      This solution contains both a project for the Vending Machine program (Capstone)
@@ -21,11 +22,14 @@ namespace Capstone
         static void Main(string[] args)
         {
             // You may want to create some objects to get the whole process started here...
+            VendingMachine machine = new VendingMachine();
 
-            VendingMachineItem v = new Candy("Snickers");
-            Console.WriteLine($"the fully qualified type name of v is {v.GetType()}");
+            machine.Restock(machine.ReadStockFile(STOCKFILEPATH));
 
-            //VendingMachineSlot s = new VendingMachineSlot("Hershey's", 2.00m, Type.GetType("Capstone.Models."+thingFromFile));
+            foreach(string line in machine.GetInventory())
+            {
+                Console.WriteLine(line);
+            }
 
 
             // Some objects could be passed into the menu constructor, so that the menu has something to 

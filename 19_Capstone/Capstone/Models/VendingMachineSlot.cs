@@ -38,17 +38,20 @@ namespace Capstone.Models
             }
         }
 
+        /// <summary>
+        /// Gets the category of the VendingMachineItem held inside this slot (i.e. Gum, Drink, Candy etc...) or null if the slot is empty
+        /// </summary>
         public string ItemCategory
         {
             get
             {
                 if (this.Count == 0)
                 {
-                    return "";
+                    return null;
                 }
                 else
                 {
-                    return this.Peek().GetType().ToString();
+                    return this.Peek().GetType().Name;
                 }
             }
         }
@@ -87,7 +90,7 @@ namespace Capstone.Models
 
         public override string ToString()
         {
-            return ($"{this.ItemName}\t{this.Price}\t{this.ItemCategory}");
+            return String.Format("{0,20} | {1,-8:c} | {2,-15}", this.ItemName, this.Price, this.ItemCategory);
         }
     }
 }

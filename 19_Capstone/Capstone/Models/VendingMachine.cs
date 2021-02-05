@@ -24,7 +24,7 @@ namespace Capstone.Models
         /// <summary>
         /// The current balance of credit the user has. This will be increased by the TakeMoney() method.
         /// </summary>
-        public Decimal CurrentCredit { get; }
+        public Decimal CurrentCredit { get; private set; }
         #endregion
 
         #region Constructors
@@ -125,11 +125,61 @@ namespace Capstone.Models
             }
         }
 
+
+        /// <summary>
+        /// Gets the current inventory of the vending machine as a list of strings
+        /// </summary>
+        /// <returns>A list of strings representing each Vending machine slot</returns>
         public List<string> GetInventory()
         {
-            List<string> returnlist = new List<string>() ;
-
+            List<string> returnlist = new List<string>();
+            foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
+            {
+                returnlist.Add($"{kvp.Key}\t{kvp.Value.ToString()}");
+            }
             return returnlist;
+        }
+
+        public void TakeMoney(decimal moneyToTake)
+        {
+            this.CurrentCredit += moneyToTake;
+        }
+
+        /// <summary>
+        /// Tries to dispense a vending machine item out of the vendingMachineSlot indicated
+        /// </summary>
+        /// <param name="slotIdentifier">The name of the VendingMachineSlot to take from (i.e. "A1", "B1", "C3" etc..)</param>
+        /// <returns></returns>
+        public VendingMachineItem DispenseItem(string slotIdentifier)
+        {
+            try
+            {
+                VendingMachineSlot slot = this.slots[slotIdentifier];
+                //check if they have enough money
+                if (this.CurrentCredit < slot.Price)
+                {
+                    throw (new InsufficientFundsException(message: "The customer does not have enough credit to purchase this item"));
+                }
+                VendingMachineItem itemToDispense = slot.Pop();//try to get the item
+                this.CurrentCredit -= slot.Price;
+                return itemToDispense;
+            }
+            catch (KeyNotFoundException e)//thrown if the slot not exists
+            {
+                //todo: log that the user entered an invalid keytag
+                throw e;
+            }
+            //catch not enouyh money
+            catch (InvalidOperationException e)//thrown if the slot is empty
+            {
+                //todo: log that the user tried to buy a slot that was sold out
+                throw e;
+            }
+            catch (InsufficientFundsException e)//thrown if not enough money
+            {
+                //todo: log if the user tried to purchase a thing withouth enough money
+                throw e;
+            }
         }
         #endregion
 
