@@ -194,9 +194,7 @@ namespace Capstone.Models
             //the dictionary of coinGroups and Coins we will return.
             Dictionary<CoinGroup, List<Coin>> change = new Dictionary<CoinGroup, List<Coin>>();
 
-            /* get a sorted list of all coinGroups that exist. We need largest to smallest.
-             * Enums seem to naturally sort themselves from smallest to largest
-             */
+            //get a sorted list of all coinGroups that exist. We need largest to smallest.
             List<CoinGroup> sortedGroups = new List<CoinGroup>((CoinGroup[])Enum.GetValues(typeof(CoinGroup)));
             sortedGroups.Sort();
             sortedGroups.Reverse();
