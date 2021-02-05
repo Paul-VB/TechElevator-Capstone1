@@ -43,6 +43,34 @@ namespace CapstoneTests
 
         }
 
+        [TestMethod]
+        public void ItemName_Test()
+        {
+            //arrange
+            VendingMachineSlot slot = new VendingMachineSlot("Hershey's", 2.00m, "Candy");
 
+            //act
+
+            //assert
+            Assert.AreEqual("Hershey's", slot.ItemName);
+        }
+
+        [TestMethod]
+        public void ItemName_SoldOut_Test()
+        {
+            //arrange
+            VendingMachineSlot slot = new VendingMachineSlot("Hershey's", 2.00m, "Candy");
+
+            //act
+            while (slot.Count > 0)
+            {
+                slot.Pop();//empty the slot
+            }
+
+            //assert
+            Assert.AreEqual(VendingMachineSlot.SOLDOUTNAME, slot.ItemName);
+
+
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Capstone.Models.CustomExceptions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -79,13 +80,42 @@ namespace Capstone.Models
 
                 //currLine holds A1|Hershey's|2.50|Candy
 
-                string[] slotAttributes = currLine.Split("|");
+                string[] slotAttributes;
                 //slotAttributes will contain ["A1", "Hershey's", 2.50, "Candy"]
-                string name = slotAttributes[1];
-                decimal price = decimal.Parse(slotAttributes[2]);
-                string category = slotAttributes[3];
-                //build a new VendingMachineSlot object
-                VendingMachineSlot slot = new VendingMachineSlot(name, price, category);
+                string name;
+                decimal price;
+                string category;
+                VendingMachineSlot slot;
+                try
+                {
+                    slotAttributes = currLine.Split("|");
+                    name = slotAttributes[1];
+                    price = decimal.Parse(slotAttributes[2]);
+                    category = slotAttributes[3];
+                    //build a new VendingMachineSlot object
+                    slot = new VendingMachineSlot(name, price, category);
+                }
+                catch (InvalidTypeException)
+                {
+                    //todo: log the error to a file. the category in the stock file was misspelled maybe?
+                    continue;
+                }
+                catch (NullReferenceException)
+                {
+                    //todo, Log that the stock line was null. I have no idea HOW it might be null, but if it is null, we'll handle it
+                    continue;
+                }
+                catch (FormatException)
+                {
+                    //todo. log to the file that the stockFile was malformed. Is the price an actual number?
+                    continue;
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    //todo: Log to the file that the stock line had too few vertical bars
+                    continue;
+                }
+
 
                 /* add that object to our dictionary of slots
                  * A1 is the key
@@ -93,6 +123,13 @@ namespace Capstone.Models
                  */
                 this.slots.Add(slotAttributes[0], slot);
             }
+        }
+
+        public List<string> GetInventory()
+        {
+            List<string> returnlist = new List<string>() ;
+
+            return returnlist;
         }
         #endregion
 

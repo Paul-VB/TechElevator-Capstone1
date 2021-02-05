@@ -48,20 +48,34 @@ namespace CapstoneTests
         }
 
         [TestMethod]
-        public void Restock_Test_TypoInStockLine()
+        public void Restock_Test_MalformedStocklines()
         {
             //arrange
             List<string> stockLines = new List<string>()
             {
+                "A1|M&Ms|3.05|Candy",//good
+                "A2|Doritos|4.20|Chip",//good
+                "B1|Sprite|2.75|Drink",//good
+                "B2|Spearmint|0.95|gum",//good! the item type is not case sensitive!
+                "B3|Big Chew|3.65q|Gum",//bad from here down
+                "C1|Snickers||1.69|Candy",
+                "D1Pepsi|3.00|Drink",
+                "D2|Lays|2.50|CChip",
+                "break damnit!",
+                "",
+                "||||||||||",
+                null
 
-                "A2|Doritos|4.20|CChips",
+
             };
-
-            //act
             VendingMachine testMachine = new VendingMachine();
 
+            //act
+            testMachine.Restock(stockLines);
+
             //assert
-            Assert.ThrowsException<InvalidTypeException>(() => testMachine.Restock(stockLines));//lambdas are weird, yo
+            Assert.AreEqual(3, testMachine.Slots.Count, "All the correctly spelled stock lines were not added, OR the misspelled stock lines were added");
+
 
         }
     }
