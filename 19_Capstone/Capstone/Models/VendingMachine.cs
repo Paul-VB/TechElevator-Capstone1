@@ -1,13 +1,16 @@
-﻿using Capstone.Models.CustomExceptions;
+﻿using Capstone.Models.Coins;
+using Capstone.Models.CustomExceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using static Capstone.Models.Coins.Coin;
 
 namespace Capstone.Models
 {
     public class VendingMachine
     {
+
         #region Properties
         /// <summary>
         /// a private backing field for Slots
@@ -181,7 +184,47 @@ namespace Capstone.Models
                 throw e;
             }
         }
+
+        /// <summary>
+        /// Gives the customer their change using the fewest number of coins possible
+        /// </summary>
+        /// <returns>A Dictionary of coinNames and coins</returns>
+        public Dictionary<CoinGroup, List<Coin>> GiveChange()
+        {
+            //the dictionary of coinGroups and Coins we will return.
+            Dictionary<CoinGroup, List<Coin>> change = new Dictionary<CoinGroup, List<Coin>>();
+
+            /* get a sorted list of all coinGroups that exist. We need largest to smallest.
+             * Enums seem to naturally sort themselves from smallest to largest
+             */
+            List<CoinGroup> sortedGroups = new List<CoinGroup>((CoinGroup[])Enum.GetValues(typeof(CoinGroup)));
+            sortedGroups.Sort();
+            sortedGroups.Reverse();
+
+
+            //for each type of coin that exists (i.e. Pennies, Nickels, Dimes etc...
+            foreach (CoinGroup currCoinGroup in sortedGroups)
+            {
+                //get the true dollar amount for the current CoinGroup
+                decimal trueValue = (decimal)(int)currCoinGroup / 100; //Start right, start here
+
+                //initialize the coinGroups list
+                change[currCoinGroup] = new List<Coin>();
+
+                //calculate the number of coins we will need
+                int numbOfCoins = (int)(this.CurrentCredit / trueValue);//yo dawg i heard you like coins
+
+                //keep adding coins of the current type until we have reached numbOfCoins
+                for (int i = 0; i < numbOfCoins; i++)
+                {
+                    change[currCoinGroup].Add(new Coin(currCoinGroup));
+                    this.CurrentCredit -= trueValue;
+                }
+            }
+            return change;
+        }
         #endregion
+
 
 
     }

@@ -1,7 +1,10 @@
 ﻿using Capstone.CLI;
 using Capstone.Models;
+using Capstone.Models.Coins;
 using Capstone.Models.VendingMachineItems;
 using System;
+using System.Collections.Generic;
+using static Capstone.Models.Coins.Coin;
 
 namespace Capstone
 {
@@ -26,9 +29,13 @@ namespace Capstone
 
             machine.Restock(machine.ReadStockFile(STOCKFILEPATH));
 
-            foreach(string line in machine.GetInventory())
+
+            machine.TakeMoney(4.69m);
+            Dictionary<CoinGroup,List<Coin>>Change = machine.GiveChange();
+
+            foreach(CoinGroup group in Change.Keys)
             {
-                Console.WriteLine(line);
+                Console.WriteLine($"we will need {Change[group].Count} {group}s");
             }
 
 
