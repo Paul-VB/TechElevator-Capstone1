@@ -8,6 +8,12 @@ namespace Capstone.CLI
 {
     public class MainMenu : ConsoleMenu
     {
+        /*a few global color constants that should apply to all menus and sub-menus. 
+         * This will keep the look of our program consistent
+         */
+        public static ConsoleColor GlobalItemForegroundColor = ConsoleColor.Gray;
+        public static ConsoleColor GlobalSelectedItemForegroundColor = ConsoleColor.Yellow;
+
         private VendingMachine machine;
         /*******************************************************************************
          * Private data:
@@ -31,14 +37,27 @@ namespace Capstone.CLI
 
             Configure(cfg =>
            {
-               cfg.ItemForegroundColor = ConsoleColor.Cyan;
-               cfg.SelectedItemForegroundColor = ConsoleColor.Yellow;
+               cfg.ItemForegroundColor = GlobalItemForegroundColor;
+               cfg.SelectedItemForegroundColor = GlobalSelectedItemForegroundColor;
                cfg.MenuSelectionMode = MenuSelectionMode.Arrow; // KeyString: User types a key, Arrow: User selects with arrow
                cfg.KeyStringTextSeparator = ": ";
                cfg.Title = "Main Menu";
            });
         }
 
+        protected override void OnBeforeShow()
+        {
+            /*
+            Console.WriteLine(@" ___      ___ _______   ________   ________  ________                 _____ ______   ________  _________  ___  ________          ________  ________  ________     ");
+            Console.WriteLine(@"|\  \    /  /|\  ___ \ |\   ___  \|\   ___ \|\   __  \               |\   _ \  _   \|\   __  \|\___   ___\\  \|\   ____\        |\   __  \|\   __  \|\   __  \    ");
+            Console.WriteLine(@"\ \  \  /  / | \   __/|\ \  \\ \  \ \  \_|\ \ \  \|\  \  ____________\ \  \\\__\ \  \ \  \|\  \|___ \  \_\ \  \ \  \___|        \ \  \|\  \ \  \|\  \ \  \|\  \   ");
+            Console.WriteLine(@" \ \  \/  / / \ \  \_|/_\ \  \\ \  \ \  \ \\ \ \  \\\  \|\____________\ \  \\|__| \  \ \   __  \   \ \  \ \ \  \ \  \            \ \   __  \ \  \\\  \ \  \\\  \  ");
+            Console.WriteLine(@"  \ \    / /   \ \  \_|\ \ \  \\ \  \ \  \_\\ \ \  \\\  \|____________|\ \  \    \ \  \ \  \ \  \   \ \  \ \ \  \ \  \____        \ \  \|\  \ \  \\\  \ \  \\\  \ ");
+            Console.WriteLine(@"   \ \__/ /     \ \_______\ \__\\ \__\ \_______\ \_______\              \ \__\    \ \__\ \__\ \__\   \ \__\ \ \__\ \_______\       \ \_______\ \_______\ \_______\");
+            Console.WriteLine(@"    \|__|/       \|_______|\|__| \|__|\|_______|\|_______|               \|__|     \|__|\|__|\|__|    \|__|  \|__|\|_______|        \|_______|\|_______|\|_______|");
+            */
+            base.OnBeforeShow();
+        }
 
         /// <summary>
         /// Prints the VendingMachine's menu to the console.
@@ -46,11 +65,7 @@ namespace Capstone.CLI
         /// <returns></returns>
         private MenuOptionResult DisplayItems()
         {
-            foreach(string itemLine in this.machine.GetInventory())
-            {
-                string[] fields = itemLine
-                Console.WriteLine(itemLine);
-            }
+            machine.PrintInventory();
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 

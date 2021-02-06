@@ -169,10 +169,13 @@ namespace Capstone.Models
             //the color of text of items that are sold out.
             ConsoleColor soldOutColor = ConsoleColor.Red;
 
+            //the color of text of items that are almost sold out. aka "buy now while you still can" to get people to spend more money
+            ConsoleColor lowStockColor = ConsoleColor.Yellow;
+
 
             Console.ForegroundColor = normalColor;
-            Console.WriteLine("Slot | Remaining |  Cost  | Item Name");
-            Console.WriteLine("-----+-----------+--------+----------");
+            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
+            Console.WriteLine("------+-----------+--------+----------");
             foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
             {
                 string slotKey = kvp.Key;
@@ -182,20 +185,37 @@ namespace Capstone.Models
                 //Prints each line piece by piece with fancy formatting
                 //print slot tag, (A1, B2 etc...)
                 Console.ForegroundColor = normalColor;
-                Console.Write(string.Format(" {0,3}| ", slotKey));
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format("{0,4}  ", slotKey));
+                Console.ForegroundColor = normalColor;
+                Console.Write("|");
 
                 //print quantity remaining
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                Console.Write(string.Format("{0,9}| ", remaining));
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,9} ", remaining));
                 Console.ForegroundColor = normalColor;
+                Console.Write("|");
 
                 //print price
-                Console.Write(string.Format("{2,6:c}| ", cost));
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,6:c} ", cost));
+                Console.ForegroundColor = normalColor;
+                Console.Write("|");
 
                 //print item name
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                Console.Write(string.Format("{0,-15}", itemName));
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,-15}", itemName));
                 Console.ForegroundColor = normalColor;
+
+                //write new line
+                Console.Write("\n");
+
+                //restore the previous color
+                Console.ForegroundColor = oldColor;
             }
 
         }

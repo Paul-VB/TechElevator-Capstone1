@@ -29,7 +29,7 @@ namespace Capstone.Models
             {
                 if (this.Count == 0)
                 {
-                    return (Console.ForegroundColor=ConsoleColor.Red) + SOLDOUTNAME;
+                    return SOLDOUTNAME;
                 }
                 else
                 {
@@ -87,7 +87,7 @@ namespace Capstone.Models
 
         public override string ToString()
         {
-            return String.Format("{0,9} | {1,6:c} | {2,-15}", this.Count, this.Price, this.ItemName);
+            return $"{this.Count}|{this.Price:c}|{this.ItemName}";
         }
     }
 }

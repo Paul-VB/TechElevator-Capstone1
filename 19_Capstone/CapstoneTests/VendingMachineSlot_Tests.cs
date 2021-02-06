@@ -100,7 +100,7 @@ namespace CapstoneTests
             Assert.AreEqual(null, slot.ItemCategory);
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void ToString_Test()
         {
             //arrange
@@ -111,11 +111,11 @@ namespace CapstoneTests
             string result = slot.ToString();
 
             //assert
-            Assert.AreEqual("Hershey's\t\t\t$2.00\tCandy", result);
+            Assert.AreEqual("5|$2.00|Hershey's", result);
 
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void ToString_SoldOut_Test()
         {
             //arrange
@@ -129,7 +129,7 @@ namespace CapstoneTests
             string result = slot.ToString();
 
             //assert
-            Assert.AreEqual($"{VendingMachineSlot.SOLDOUTNAME}\t\t\t$2.00\t", result);
+            Assert.AreEqual($"0|$2.00|{VendingMachineSlot.SOLDOUTNAME}", result);
 
         }
 

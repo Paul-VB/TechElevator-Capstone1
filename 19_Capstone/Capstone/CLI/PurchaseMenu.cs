@@ -26,6 +26,8 @@ namespace Capstone.CLI
             AddOption("Finish Transaction and receive change", GetChange, "X");
             Configure(cfg =>
             {
+                cfg.ItemForegroundColor = MainMenu.GlobalItemForegroundColor;
+                cfg.SelectedItemForegroundColor = MainMenu.GlobalSelectedItemForegroundColor;
                 cfg.Title = "Purchase Menu";
             });
         }
@@ -54,10 +56,7 @@ namespace Capstone.CLI
         /// </summary>
         private MenuOptionResult SelectProduct()
         {
-            foreach (string itemLine in this.machine.GetInventory())
-            {
-                Console.WriteLine(itemLine);
-            }
+            this.machine.PrintInventory();
             Console.WriteLine();
             //the customer's slot selection (i.e. A1, B2, C1 etc...)
             string selection = GetString("Please enter your selection: ").ToUpper();

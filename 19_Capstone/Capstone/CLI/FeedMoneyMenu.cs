@@ -24,6 +24,10 @@ namespace Capstone.CLI
             AddOption("Go Back", Close, "C");
             Configure(cfg =>
             {
+                cfg.ItemForegroundColor = MainMenu.GlobalItemForegroundColor;
+                cfg.SelectedItemForegroundColor = MainMenu.GlobalSelectedItemForegroundColor;
+                cfg.MenuSelectionMode = MenuSelectionMode.Arrow; // KeyString: User types a key, Arrow: User selects with arrow
+                cfg.KeyStringTextSeparator = ": ";
                 cfg.Title = "Please Insert Money";
             });
         }
