@@ -62,7 +62,7 @@ namespace Capstone.CLI
             ConsoleColor oldBackgroundColor = Console.BackgroundColor;
 
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.WriteLine(FiggleFonts.SlantSmall.Render(" VENDO-MATIC 800 "));
             Console.ForegroundColor = oldForegroundColor;
             Console.BackgroundColor = oldBackgroundColor;
