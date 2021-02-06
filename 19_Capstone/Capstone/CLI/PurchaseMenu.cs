@@ -59,13 +59,18 @@ namespace Capstone.CLI
                 Console.WriteLine(itemLine);
             }
             Console.WriteLine();
+            //the customer's slot selection (i.e. A1, B2, C1 etc...)
             string selection = GetString("Please enter your selection: ").ToUpper();
+
+            //the item we will try to return to the customer
             VendingMachineItem item = null;
             try
             {
                 item = this.machine.DispenseItem(selection);
                 Console.WriteLine(item.EatMessage);
-                Console.WriteLine($"Enjoy your {item.Name}!");
+                Console.WriteLine($"Enjoy your {item.Name}! ");
+                Console.WriteLine($"Cost: {this.machine.Slots[selection].Price:c}");
+                Console.WriteLine($"Your Remaining Credit {this.machine.CurrentCredit:c}");
             }
             catch (KeyNotFoundException)//invalid item selected
             {

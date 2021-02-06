@@ -83,9 +83,6 @@ namespace Capstone.Models
 
             //set the price
             this.Price = price;
-
-
-
         }
 
         public override string ToString()
