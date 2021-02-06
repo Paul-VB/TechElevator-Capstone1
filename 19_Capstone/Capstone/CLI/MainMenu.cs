@@ -1,6 +1,7 @@
 ﻿using Capstone.Models;
 using MenuFramework;
 using System;
+using Figgle;
 using System.Collections.Generic;
 using System.Text;
 
@@ -47,16 +48,31 @@ namespace Capstone.CLI
 
         protected override void OnBeforeShow()
         {
-            /*
-            Console.WriteLine(@" ___      ___ _______   ________   ________  ________                 _____ ______   ________  _________  ___  ________          ________  ________  ________     ");
-            Console.WriteLine(@"|\  \    /  /|\  ___ \ |\   ___  \|\   ___ \|\   __  \               |\   _ \  _   \|\   __  \|\___   ___\\  \|\   ____\        |\   __  \|\   __  \|\   __  \    ");
-            Console.WriteLine(@"\ \  \  /  / | \   __/|\ \  \\ \  \ \  \_|\ \ \  \|\  \  ____________\ \  \\\__\ \  \ \  \|\  \|___ \  \_\ \  \ \  \___|        \ \  \|\  \ \  \|\  \ \  \|\  \   ");
-            Console.WriteLine(@" \ \  \/  / / \ \  \_|/_\ \  \\ \  \ \  \ \\ \ \  \\\  \|\____________\ \  \\|__| \  \ \   __  \   \ \  \ \ \  \ \  \            \ \   __  \ \  \\\  \ \  \\\  \  ");
-            Console.WriteLine(@"  \ \    / /   \ \  \_|\ \ \  \\ \  \ \  \_\\ \ \  \\\  \|____________|\ \  \    \ \  \ \  \ \  \   \ \  \ \ \  \ \  \____        \ \  \|\  \ \  \\\  \ \  \\\  \ ");
-            Console.WriteLine(@"   \ \__/ /     \ \_______\ \__\\ \__\ \_______\ \_______\              \ \__\    \ \__\ \__\ \__\   \ \__\ \ \__\ \_______\       \ \_______\ \_______\ \_______\");
-            Console.WriteLine(@"    \|__|/       \|_______|\|__| \|__|\|_______|\|_______|               \|__|     \|__|\|__|\|__|    \|__|  \|__|\|_______|        \|_______|\|_______|\|_______|");
-            */
+            DisplayLogo();
             base.OnBeforeShow();
+        }
+
+        /// <summary>
+        /// Prints a big "VENDO-MATIC 800" logo to the screen. Should usually be called in the OnBeforeShow method
+        /// </summary>
+        public static void DisplayLogo()
+        {
+            //get the current color so we can restore it when we're done
+            ConsoleColor oldForegroundColor = Console.ForegroundColor;
+            ConsoleColor oldBackgroundColor = Console.BackgroundColor;
+
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.BackgroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine(FiggleFonts.SlantSmall.Render(" VENDO-MATIC 800 "));
+            Console.ForegroundColor = oldForegroundColor;
+            Console.BackgroundColor = oldBackgroundColor;
+        }
+
+        protected override void OnAfterShow()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Paul VandenBroeck and Jamie Uhl");
+            Console.WriteLine("Making Robust, Hand-Crafted Vending Machines since February 2021");
         }
 
         /// <summary>
@@ -65,6 +81,7 @@ namespace Capstone.CLI
         /// <returns></returns>
         private MenuOptionResult DisplayItems()
         {
+            MainMenu.DisplayLogo();
             machine.PrintInventory();
             return MenuOptionResult.WaitAfterMenuSelection;
         }

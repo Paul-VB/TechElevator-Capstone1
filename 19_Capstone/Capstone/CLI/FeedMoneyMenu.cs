@@ -1,4 +1,5 @@
 ﻿using Capstone.Models;
+using Figgle;
 using MenuFramework;
 using System;
 using System.Collections.Generic;
@@ -34,8 +35,10 @@ namespace Capstone.CLI
 
         protected override void OnBeforeShow()
         {
+            MainMenu.DisplayLogo();
+            this.machine.PrintCredit();
             base.OnBeforeShow();
-            Console.WriteLine($"Current Credit: {this.machine.CurrentCredit:c}");
+
         }
 
         /// <summary>

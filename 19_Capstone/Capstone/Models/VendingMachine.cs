@@ -43,6 +43,7 @@ namespace Capstone.Models
 
         }
         #endregion
+
         #region Public Methods
         /// <summary>
         /// Reads the lines from a given file path, and returns those lines as a List of strings
@@ -155,70 +156,7 @@ namespace Capstone.Models
         }
 
 
-        /// <summary>
-        /// Prints the vending machine's inventory to the console with fancy formatting and pretty colors
-        /// </summary>
-        public void PrintInventory()
-        {
-            //get the current color so we can restore it when we're done
-            ConsoleColor oldColor = Console.ForegroundColor;
 
-            //the color of "normal" text we want to show to users
-            ConsoleColor normalColor = ConsoleColor.Gray;
-
-            //the color of text of items that are sold out.
-            ConsoleColor soldOutColor = ConsoleColor.Red;
-
-            //the color of text of items that are almost sold out. aka "buy now while you still can" to get people to spend more money
-            ConsoleColor lowStockColor = ConsoleColor.Yellow;
-
-
-            Console.ForegroundColor = normalColor;
-            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
-            Console.WriteLine("------+-----------+--------+----------");
-            foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
-            {
-                string slotKey = kvp.Key;
-                int remaining = kvp.Value.Count;
-                decimal cost = kvp.Value.Price;
-                string itemName = kvp.Value.ItemName;
-                //Prints each line piece by piece with fancy formatting
-                //print slot tag, (A1, B2 etc...)
-                Console.ForegroundColor = normalColor;
-                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
-                Console.Write(string.Format("{0,4}  ", slotKey));
-                Console.ForegroundColor = normalColor;
-                Console.Write("|");
-
-                //print quantity remaining
-                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
-                Console.Write(string.Format(" {0,9} ", remaining));
-                Console.ForegroundColor = normalColor;
-                Console.Write("|");
-
-                //print price
-                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
-                Console.Write(string.Format(" {0,6:c} ", cost));
-                Console.ForegroundColor = normalColor;
-                Console.Write("|");
-
-                //print item name
-                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
-                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
-                Console.Write(string.Format(" {0,-15}", itemName));
-                Console.ForegroundColor = normalColor;
-
-                //write new line
-                Console.Write("\n");
-
-                //restore the previous color
-                Console.ForegroundColor = oldColor;
-            }
-
-        }
 
         public void TakeMoney(decimal moneyToTake)
         {
@@ -325,6 +263,110 @@ namespace Capstone.Models
         }
 
 
+        #endregion
+
+        #region UI Direct print methods
+        /// <summary>
+        /// Prints the vending machine's inventory to the console with fancy formatting and pretty colors
+        /// </summary>
+        public void PrintInventory()
+        {
+            //get the current color so we can restore it when we're done
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            //the color of "normal" text we want to show to users
+            ConsoleColor normalColor = ConsoleColor.Gray;
+
+            //the color of text of items that are sold out.
+            ConsoleColor soldOutColor = ConsoleColor.Red;
+
+            //the color of text of items that are almost sold out. aka "buy now while you still can" to get people to spend more money
+            ConsoleColor lowStockColor = ConsoleColor.Yellow;
+
+
+            Console.ForegroundColor = normalColor;
+            Console.WriteLine("--------------------------------------");
+            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
+            Console.WriteLine("------+-----------+--------+----------");
+            foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
+            {
+                string slotKey = kvp.Key;
+                int remaining = kvp.Value.Count;
+                decimal cost = kvp.Value.Price;
+                string itemName = kvp.Value.ItemName;
+                //Prints each line piece by piece with fancy formatting
+                //print slot tag, (A1, B2 etc...)
+                Console.ForegroundColor = normalColor;
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format("{0,4}  ", slotKey));
+                Console.ForegroundColor = normalColor;
+                Console.Write("|");
+
+                //print quantity remaining
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,9} ", remaining));
+                Console.ForegroundColor = normalColor;
+                Console.Write("|");
+
+                //print price
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,6:c} ", cost));
+                Console.ForegroundColor = normalColor;
+                Console.Write("|");
+
+                //print item name
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
+                Console.Write(string.Format(" {0,-15}", itemName));
+                Console.ForegroundColor = normalColor;
+
+                //write new line
+                Console.Write("\n");
+
+                //restore the previous color
+                Console.ForegroundColor = oldColor;
+            }
+            Console.WriteLine("------+-----------+--------+----------");
+            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
+            Console.WriteLine("--------------------------------------");
+        }
+
+        /// <summary>
+        /// Prints the customer's current credit to the console with fancy formatting and pretty colors.
+        /// </summary>
+        public void PrintCredit()
+        {
+            ConsoleColor veryLowCreditColor = ConsoleColor.Red;
+            ConsoleColor lowCreditColor = ConsoleColor.Yellow;
+            ConsoleColor goodCreditColor = ConsoleColor.Green;
+            decimal veryLowCreditLevel = 1.00m;
+            decimal lowCreditLevel = 2.00m;
+            //get the current color so we can restore it when we're done
+            ConsoleColor oldForegroundColor = Console.ForegroundColor;
+            ConsoleColor oldBackgroundColor = Console.BackgroundColor;
+            Console.Write("Your Remaining Credit: ");
+            if (this.CurrentCredit < veryLowCreditLevel)
+            {
+                Console.ForegroundColor = veryLowCreditColor;
+            }
+            else if (this.CurrentCredit < lowCreditLevel)
+            {
+                Console.ForegroundColor = lowCreditColor;
+            }
+            else
+            {
+                Console.ForegroundColor = goodCreditColor;
+            }
+
+
+            Console.WriteLine($"{this.CurrentCredit:c}");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = oldForegroundColor;
+            Console.BackgroundColor = oldBackgroundColor;
+        }
         #endregion
 
 
