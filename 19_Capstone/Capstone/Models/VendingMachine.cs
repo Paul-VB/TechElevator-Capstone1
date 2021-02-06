@@ -10,7 +10,10 @@ namespace Capstone.Models
 {
     public class VendingMachine
     {
+        //the path to the CSV file that holds the info on what items and prices to restock the machine with
         const string STOCKFILEPATH = @"..\..\..\..\vendingmachine.csv";
+
+        //the path to the file where all events are logged
         const string AUDITFILEPATH = @"..\..\..\..\Log.txt";
         #region Properties
         /// <summary>
@@ -26,7 +29,9 @@ namespace Capstone.Models
         public Dictionary<string, VendingMachineSlot> Slots { get { return new Dictionary<string, VendingMachineSlot>(this.slots); } }
 
         /// <summary>
-        /// The current balance of credit the user has. This will be increased by the TakeMoney() method.
+        /// The current balance of credit the user has. 
+        /// This will be increased by the TakeMoney() method, 
+        /// and should be decreased when they purchase something
         /// </summary>
         public Decimal CurrentCredit { get; private set; }
 
@@ -62,14 +67,15 @@ namespace Capstone.Models
 
             }
 
-            LogToAuditFile("READ STOCK FILE",startCredit, CurrentCredit);
+            LogToAuditFile("READ STOCK FILE", startCredit, CurrentCredit);
             return returnList;
         }
 
 
         /// <summary>
         /// Accepts a list of strings, and builds VendingMachineSlot objects from each string them. Each string should be formatted as follows <br></br>
-        /// slotName|itemName|slotPrice|itemCategory
+        /// slotName|itemName|slotPrice|itemCategory <br></br>
+        /// This method should commonly be used in conjunction with the ReadStockFile method
         /// </summary>
         /// <param name="stockLines">a list of strings representing the vendingMachineSlots</param>
         public void Restock(List<string> stockLines)
@@ -78,7 +84,7 @@ namespace Capstone.Models
             //loop though each item in the stockLines
             foreach (string currLine in stockLines)
             {
-                /*using currLine, build a vendingMachineSlot object
+                /* Using currLine, build a vendingMachineSlot object
                  * currLine is a string. its going to look something like this:
                  * A1|Hershey's|2.50|Candy
                  * "A1" represents the slot identifier thing
@@ -87,10 +93,8 @@ namespace Capstone.Models
                  * "Candy" is the food item's category 
                 */
 
-                //currLine holds A1|Hershey's|2.50|Candy
-
                 string[] slotAttributes;
-                //slotAttributes will contain ["A1", "Hershey's", 2.50, "Candy"]
+                //slotAttributes will contain something like ["A1", "Hershey's", 2.50, "Candy"]
                 string name;
                 decimal price;
                 string category;
@@ -142,13 +146,58 @@ namespace Capstone.Models
         public List<string> GetInventory()
         {
             List<string> returnlist = new List<string>();
-            returnlist.Add("Slot | Remaining |  Cost  | Item Name");
-            returnlist.Add("-----+-----------+--------+----------");
+
             foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
             {
-                returnlist.Add($" {kvp.Key}  | {kvp.Value.ToString()}");
+                returnlist.Add($"{kvp.Key}|{kvp.Value.ToString()}");
             }
             return returnlist;
+        }
+
+
+        /// <summary>
+        /// Prints the vending machine's inventory to the console with fancy formatting and pretty colors
+        /// </summary>
+        public void PrintInventory()
+        {
+            //get the current color so we can restore it when we're done
+            ConsoleColor oldColor = Console.ForegroundColor;
+
+            //the color of "normal" text we want to show to users
+            ConsoleColor normalColor = ConsoleColor.Gray;
+
+            //the color of text of items that are sold out.
+            ConsoleColor soldOutColor = ConsoleColor.Red;
+
+
+            Console.ForegroundColor = normalColor;
+            Console.WriteLine("Slot | Remaining |  Cost  | Item Name");
+            Console.WriteLine("-----+-----------+--------+----------");
+            foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
+            {
+                string slotKey = kvp.Key;
+                int remaining = kvp.Value.Count;
+                decimal cost = kvp.Value.Price;
+                string itemName = kvp.Value.ItemName;
+                //Prints each line piece by piece with fancy formatting
+                //print slot tag, (A1, B2 etc...)
+                Console.ForegroundColor = normalColor;
+                Console.Write(string.Format(" {0,3}| ", slotKey));
+
+                //print quantity remaining
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                Console.Write(string.Format("{0,9}| ", remaining));
+                Console.ForegroundColor = normalColor;
+
+                //print price
+                Console.Write(string.Format("{2,6:c}| ", cost));
+
+                //print item name
+                if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
+                Console.Write(string.Format("{0,-15}", itemName));
+                Console.ForegroundColor = normalColor;
+            }
+
         }
 
         public void TakeMoney(decimal moneyToTake)
@@ -248,7 +297,7 @@ namespace Capstone.Models
         /// TODO Edit XML Comment Template for 
         private void LogToAuditFile(string eventDescription, decimal startCredit, decimal endCredit)
         {
-            using (StreamWriter writer = new StreamWriter(AUDITFILEPATH,true))
+            using (StreamWriter writer = new StreamWriter(AUDITFILEPATH, true))
             {
                 string logEvent = $"{DateTime.Now} \t {eventDescription} \t {startCredit:c} \t {endCredit}";
                 writer.WriteLine(logEvent);

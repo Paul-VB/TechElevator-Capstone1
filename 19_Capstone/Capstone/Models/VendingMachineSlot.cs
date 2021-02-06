@@ -29,7 +29,7 @@ namespace Capstone.Models
             {
                 if (this.Count == 0)
                 {
-                    return SOLDOUTNAME;
+                    return (Console.ForegroundColor=ConsoleColor.Red) + SOLDOUTNAME;
                 }
                 else
                 {

@@ -40,11 +40,15 @@ namespace Capstone.CLI
         }
 
 
-
+        /// <summary>
+        /// Prints the VendingMachine's menu to the console.
+        /// </summary>
+        /// <returns></returns>
         private MenuOptionResult DisplayItems()
         {
             foreach(string itemLine in this.machine.GetInventory())
             {
+                string[] fields = itemLine
                 Console.WriteLine(itemLine);
             }
             return MenuOptionResult.WaitAfterMenuSelection;
