@@ -83,6 +83,43 @@ namespace CapstoneTests
         }
 
         [TestMethod]
+        public void GetInventory_Test()
+        {
+            List<string> expectedInventory = new List<string>()
+            {
+                "A1|3|$3.05|M&Ms",
+                "A2|4|$4.20|Doritos",
+                $"B1|{VendingMachineSlot.DISPLAY_QUANTITY_SOLD_OUT}|$2.75|Sprite",
+                "B2|5|$3.65|Big Chew"
+            };
+            //arrange
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(sampleStockFileLines);
+            testMachine.TakeMoney(40.00m);
+
+            //sell 2 M&Ms
+            testMachine.DispenseItem("A1");
+            testMachine.DispenseItem("A1");
+            //sell 1 Doritos
+            testMachine.DispenseItem("A2");
+            //sell all sprite
+            while (testMachine.Slots["B1"].Count > 0)
+            {
+                testMachine.DispenseItem("B1");
+            }
+
+            //act
+            List<string> resultInventory = testMachine.GetInventory();
+
+            //assert
+            CollectionAssert.AreEquivalent(expectedInventory, resultInventory);
+
+
+
+
+        }
+
+        [TestMethod]
         public void DispenseItem_Test()
         {
             //arrange
@@ -117,7 +154,7 @@ namespace CapstoneTests
             VendingMachine testMachine = new VendingMachine();
             testMachine.Restock(new List<string>(sampleStockFileLines));
             testMachine.TakeMoney(50.00m);
-            //sell 3 M&Ms
+            //sell 2 M&Ms
             testMachine.DispenseItem("A1");
             testMachine.DispenseItem("A1");
             //sell 1 Doritos

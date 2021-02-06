@@ -36,7 +36,7 @@ namespace Capstone.Models
         /// This will be increased by the TakeMoney() method, 
         /// and should be decreased when they purchase something
         /// </summary>
-        public Decimal CurrentCredit { get; private set; }
+        public decimal CurrentCredit { get; private set; }
 
         #endregion
 
