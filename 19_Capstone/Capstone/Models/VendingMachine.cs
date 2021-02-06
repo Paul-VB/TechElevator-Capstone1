@@ -29,6 +29,7 @@ namespace Capstone.Models
         /// The current balance of credit the user has. This will be increased by the TakeMoney() method.
         /// </summary>
         public Decimal CurrentCredit { get; private set; }
+
         #endregion
 
         #region Constructors
@@ -61,7 +62,7 @@ namespace Capstone.Models
 
             }
 
-            LogToAuditFile("Read Stock File",startCredit, CurrentCredit);
+            LogToAuditFile("READ STOCK FILE",startCredit, CurrentCredit);
             return returnList;
         }
 
@@ -105,22 +106,22 @@ namespace Capstone.Models
                 }
                 catch (InvalidTypeException)
                 {
-                    LogToAuditFile("Bad StockFile line! the category in the stock file may have been misspelled", startCredit, CurrentCredit);
+                    LogToAuditFile("BAD STOCK FILE LINE: the category in the stock file may have been misspelled", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (NullReferenceException)
                 {
-                    LogToAuditFile("Bad StockFile line! (this really shouldn't be possible, but the stock file line was null)", startCredit, CurrentCredit);
+                    LogToAuditFile("BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null)", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (FormatException)
                 {
-                    LogToAuditFile("Bad StockFile line! Is the price an actual number?", startCredit, CurrentCredit);
+                    LogToAuditFile("BAD STOCK FILE LINE: Is the price an actual number?", startCredit, CurrentCredit);
                     continue;
                 }
                 catch (IndexOutOfRangeException)
                 {
-                    LogToAuditFile("Bad StockFile line! Is there the correct number of vertical bars in the line?", startCredit, CurrentCredit);
+                    LogToAuditFile("BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line?", startCredit, CurrentCredit);
                     continue;
                 }
 
@@ -152,7 +153,9 @@ namespace Capstone.Models
 
         public void TakeMoney(decimal moneyToTake)
         {
+            decimal startCredit = CurrentCredit;
             this.CurrentCredit += moneyToTake;
+            LogToAuditFile($"FEED MONEY:", startCredit, CurrentCredit);
         }
 
         /// <summary>
@@ -174,21 +177,23 @@ namespace Capstone.Models
                 }
                 VendingMachineItem itemToDispense = slot.Pop();//try to get the item
                 this.CurrentCredit -= slot.Price;
+                LogToAuditFile($"SUCCESSFUL PURCHASE: {itemToDispense.Name} {slotIdentifier}", startCredit, CurrentCredit);
+
                 return itemToDispense;
             }
             catch (KeyNotFoundException e)//thrown if the slot not exists
             {
-                LogToAuditFile($"Bad User Input! User tried to select invalid slot {slotIdentifier}", startCredit, CurrentCredit);
+                LogToAuditFile($"SLOT NOT FOUND: {slotIdentifier}", startCredit, CurrentCredit);
                 throw e;
             }
             catch (InvalidOperationException e)//thrown if the slot is empty
             {
-                //todo: log that the user tried to buy a slot that was sold out
+                LogToAuditFile($"ITEM SOLD OUT: {slotIdentifier}", startCredit, CurrentCredit);
                 throw e;
             }
             catch (InsufficientFundsException e)//thrown if not enough money
             {
-                //todo: log if the user tried to purchase a thing withouth enough money
+                LogToAuditFile($"INSUFFICIENT FUNDS: {this.slots[slotIdentifier].Peek().Name} {slotIdentifier}", startCredit, CurrentCredit);
                 throw e;
             }
         }
@@ -199,6 +204,7 @@ namespace Capstone.Models
         /// <returns>A Dictionary of coinNames and coins</returns>
         public Dictionary<CoinGroup, List<Coin>> GiveChange()
         {
+            decimal startCredit = CurrentCredit;
             //the dictionary of coinGroups and Coins we will return.
             Dictionary<CoinGroup, List<Coin>> change = new Dictionary<CoinGroup, List<Coin>>();
 
@@ -227,6 +233,7 @@ namespace Capstone.Models
                     this.CurrentCredit -= trueValue;
                 }
             }
+            LogToAuditFile($"GIVE CHANGE:", startCredit, CurrentCredit);
             return change;
         }
 
@@ -247,6 +254,8 @@ namespace Capstone.Models
                 writer.WriteLine(logEvent);
             }
         }
+
+
         #endregion
 
 

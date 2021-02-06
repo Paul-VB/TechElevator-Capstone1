@@ -28,6 +28,7 @@ namespace Capstone.CLI
             AddOption("Purchase Items", PurchaseMenu, "P");
             AddOption("Quit", Close, "Q");
 
+
             Configure(cfg =>
            {
                cfg.ItemForegroundColor = ConsoleColor.Cyan;
