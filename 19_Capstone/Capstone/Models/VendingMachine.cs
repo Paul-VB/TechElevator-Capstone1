@@ -15,6 +15,9 @@ namespace Capstone.Models
 
         //the path to the file where all events are logged
         const string AUDITFILEPATH = @"..\..\..\..\Log.txt";
+
+        //the path to where the salesReport files will go
+        const string SALESREPORTFOLDER = @"..\..\..\..\SalesReports\";
         #region Properties
         /// <summary>
         /// a private backing field for Slots
@@ -262,6 +265,22 @@ namespace Capstone.Models
             }
         }
 
+        public void WriteSalesReport()
+        {
+            //create a new file path that includes the current datetime, so each sales report is unique
+            string folderFriendlyDateStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
+            string fullSalesReportPath = Path.Combine(SALESREPORTFOLDER, folderFriendlyDateStamp+"-SalesReport.txt");
+
+            //write out to the new salesreport file
+            using (StreamWriter writer = new StreamWriter(fullSalesReportPath))
+            {
+                foreach (VendingMachineSlot slot in this.Slots.Values)
+                {
+                    writer.WriteLine($"{slot.ItemName}|{slot.Capacity-slot.Count}");
+                }
+            }
+        }
+
 
         #endregion
 
@@ -277,6 +296,9 @@ namespace Capstone.Models
             //the color of "normal" text we want to show to users
             ConsoleColor normalColor = ConsoleColor.Gray;
 
+            //the color of the dividers we want to show to users
+            ConsoleColor dividerColor = ConsoleColor.Blue;
+
             //the color of text of items that are sold out.
             ConsoleColor soldOutColor = ConsoleColor.Red;
 
@@ -284,38 +306,64 @@ namespace Capstone.Models
             ConsoleColor lowStockColor = ConsoleColor.Yellow;
 
 
-            Console.ForegroundColor = normalColor;
+            //Just a little inner method for printing the header
+            void PrintHeader()
+            {
+
+                Console.Write(" Slot ");
+                Console.ForegroundColor = dividerColor;
+                Console.Write("|");
+                Console.ForegroundColor = normalColor;
+                Console.Write(" Remaining ");
+                Console.ForegroundColor = dividerColor;
+                Console.Write("|");
+                Console.ForegroundColor = normalColor;
+                Console.Write("  Cost  ");
+                Console.ForegroundColor = dividerColor;
+                Console.Write("|");
+                Console.ForegroundColor = normalColor;
+                Console.Write(" Item Name ");
+                Console.WriteLine();
+
+            }
+            Console.ForegroundColor = dividerColor;
             Console.WriteLine("--------------------------------------");
-            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
+            Console.ForegroundColor = normalColor;
+            PrintHeader();
+            Console.ForegroundColor = dividerColor;
             Console.WriteLine("------+-----------+--------+----------");
+            Console.ForegroundColor = normalColor;
             foreach (KeyValuePair<string, VendingMachineSlot> kvp in this.slots)
             {
                 string slotKey = kvp.Key;
                 int remaining = kvp.Value.Count;
                 decimal cost = kvp.Value.Price;
-                string itemName = kvp.Value.ItemName;
+                string itemName = kvp.Value.ItemDisplayName;
                 //Prints each line piece by piece with fancy formatting
                 //print slot tag, (A1, B2 etc...)
                 Console.ForegroundColor = normalColor;
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
                 else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
                 Console.Write(string.Format("{0,4}  ", slotKey));
-                Console.ForegroundColor = normalColor;
+                Console.ForegroundColor = dividerColor;
                 Console.Write("|");
+                Console.ForegroundColor = normalColor;
 
                 //print quantity remaining
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
                 else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
                 Console.Write(string.Format(" {0,9} ", remaining));
-                Console.ForegroundColor = normalColor;
+                Console.ForegroundColor = dividerColor;
                 Console.Write("|");
+                Console.ForegroundColor = normalColor;
 
                 //print price
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
                 else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
                 Console.Write(string.Format(" {0,6:c} ", cost));
-                Console.ForegroundColor = normalColor;
+                Console.ForegroundColor = dividerColor;
                 Console.Write("|");
+                Console.ForegroundColor = normalColor;
 
                 //print item name
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
@@ -329,9 +377,13 @@ namespace Capstone.Models
                 //restore the previous color
                 Console.ForegroundColor = oldColor;
             }
+            Console.ForegroundColor = dividerColor;
             Console.WriteLine("------+-----------+--------+----------");
-            Console.WriteLine(" Slot | Remaining |  Cost  | Item Name");
+            Console.ForegroundColor = normalColor;
+            PrintHeader();
+            Console.ForegroundColor = dividerColor;
             Console.WriteLine("--------------------------------------");
+            Console.ForegroundColor = normalColor;
         }
 
         /// <summary>

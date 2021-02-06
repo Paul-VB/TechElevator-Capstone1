@@ -23,7 +23,7 @@ namespace Capstone.Models
         /// <summary>
         /// Gets the name of the VendingMachineItems stored in this slot. If the slot is empty, returns "SOLD OUT"
         /// </summary>
-        public string ItemName
+        public string ItemDisplayName
         {
             get
             {
@@ -33,10 +33,15 @@ namespace Capstone.Models
                 }
                 else
                 {
-                    return this.Peek().Name;
+                    return this.ItemName;
                 }
             }
         }
+
+        /// <summary>
+        /// The name of the item that was initially loaded into this slot
+        /// </summary>
+        public string ItemName { get; } = "";
 
         /// <summary>
         /// Gets the category of the VendingMachineItem held inside this slot (i.e. Gum, Drink, Candy etc...) or null if the slot is empty
@@ -83,11 +88,14 @@ namespace Capstone.Models
 
             //set the price
             this.Price = price;
+
+            //set the true item name
+            this.ItemName = itemName;
         }
 
         public override string ToString()
         {
-            return $"{this.Count}|{this.Price:c}|{this.ItemName}";
+            return $"{this.Count}|{this.Price:c}|{this.ItemDisplayName}";
         }
     }
 }

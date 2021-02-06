@@ -238,3 +238,107 @@
 2/6/2021 11:48:46 AM 	 GIVE CHANGE: 	 $0.00 	 0.00
 2/6/2021 11:48:49 AM 	 GIVE CHANGE: 	 $0.00 	 0.00
 2/6/2021 11:50:41 AM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 11:56:20 AM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 11:59:36 AM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 11:59:57 AM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:00:18 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:03:34 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:04:59 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:05:54 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:07:03 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:07:23 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:07:41 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:07:54 PM 	 FEED MONEY: 	 $0.00 	 10.00
+2/6/2021 12:07:54 PM 	 FEED MONEY: 	 $10.00 	 20.00
+2/6/2021 12:08:10 PM 	 SUCCESSFUL PURCHASE: Potato Crisps A1 	 $20.00 	 16.95
+2/6/2021 12:08:23 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:08:37 PM 	 FEED MONEY: 	 $0.00 	 5.00
+2/6/2021 12:08:38 PM 	 FEED MONEY: 	 $5.00 	 10.00
+2/6/2021 12:08:44 PM 	 SUCCESSFUL PURCHASE: U-Chews D1 	 $10.00 	 9.15
+2/6/2021 12:08:58 PM 	 SUCCESSFUL PURCHASE: U-Chews D1 	 $9.15 	 8.30
+2/6/2021 12:08:59 PM 	 SUCCESSFUL PURCHASE: U-Chews D1 	 $8.30 	 7.45
+2/6/2021 12:09:01 PM 	 SUCCESSFUL PURCHASE: U-Chews D1 	 $7.45 	 6.60
+2/6/2021 12:09:05 PM 	 SUCCESSFUL PURCHASE: U-Chews D1 	 $6.60 	 5.75
+2/6/2021 12:09:13 PM 	 ITEM SOLD OUT: D1 	 $5.75 	 5.75
+2/6/2021 12:09:16 PM 	 SLOT NOT FOUND: DSAD 	 $5.75 	 5.75
+2/6/2021 12:09:22 PM 	 SLOT NOT FOUND: SSSSSS 	 $5.75 	 5.75
+2/6/2021 12:09:27 PM 	 SLOT NOT FOUND: A 	 $5.75 	 5.75
+2/6/2021 12:09:29 PM 	 GIVE CHANGE: 	 $5.75 	 0.00
+2/6/2021 12:09:51 PM 	 INSUFFICIENT FUNDS: Heavy C4 	 $0.00 	 0.00
+2/6/2021 12:10:05 PM 	 SLOT NOT FOUND: A 	 $0.00 	 0.00
+2/6/2021 12:10:09 PM 	 FEED MONEY: 	 $0.00 	 5.00
+2/6/2021 12:10:14 PM 	 ITEM SOLD OUT: D1 	 $5.00 	 5.00
+2/6/2021 12:10:25 PM 	 SUCCESSFUL PURCHASE: Potato Crisps A1 	 $5.00 	 1.95
+2/6/2021 12:10:37 PM 	 SUCCESSFUL PURCHASE: Triplemint D4 	 $1.95 	 1.20
+2/6/2021 12:10:41 PM 	 SUCCESSFUL PURCHASE: Triplemint D4 	 $1.20 	 0.45
+2/6/2021 12:10:55 PM 	 SLOT NOT FOUND: CANCEL 	 $0.45 	 0.45
+2/6/2021 12:10:58 PM 	 GIVE CHANGE: 	 $0.45 	 0.00
+2/6/2021 12:11:35 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:24:54 PM 	 FEED MONEY: 	 $0.00 	 100.00
+2/6/2021 12:24:54 PM 	 SUCCESSFUL PURCHASE: Coke B1 	 $100.00 	 95.00
+2/6/2021 12:24:54 PM 	 FEED MONEY: 	 $0.00 	 0.41
+2/6/2021 12:24:54 PM 	 GIVE CHANGE: 	 $0.41 	 0.00
+2/6/2021 12:24:54 PM 	 FEED MONEY: 	 $0.00 	 0.57
+2/6/2021 12:24:54 PM 	 GIVE CHANGE: 	 $0.57 	 0.00
+2/6/2021 12:24:54 PM 	 FEED MONEY: 	 $0.00 	 0.69
+2/6/2021 12:24:54 PM 	 GIVE CHANGE: 	 $0.69 	 0.00
+2/6/2021 12:24:55 PM 	 FEED MONEY: 	 $0.00 	 4.20
+2/6/2021 12:24:55 PM 	 GIVE CHANGE: 	 $4.20 	 0.00
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:24:55 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 0
+2/6/2021 12:28:44 PM 	 FEED MONEY: 	 $0.00 	 100.00
+2/6/2021 12:28:44 PM 	 SUCCESSFUL PURCHASE: Coke B1 	 $100.00 	 95.00
+2/6/2021 12:28:44 PM 	 FEED MONEY: 	 $0.00 	 0.41
+2/6/2021 12:28:45 PM 	 GIVE CHANGE: 	 $0.41 	 0.00
+2/6/2021 12:28:45 PM 	 FEED MONEY: 	 $0.00 	 0.57
+2/6/2021 12:28:45 PM 	 GIVE CHANGE: 	 $0.57 	 0.00
+2/6/2021 12:28:45 PM 	 FEED MONEY: 	 $0.00 	 0.69
+2/6/2021 12:28:45 PM 	 GIVE CHANGE: 	 $0.69 	 0.00
+2/6/2021 12:28:45 PM 	 FEED MONEY: 	 $0.00 	 4.20
+2/6/2021 12:28:45 PM 	 GIVE CHANGE: 	 $4.20 	 0.00
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:28:45 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 FEED MONEY: 	 $0.00 	 100.00
+2/6/2021 12:29:51 PM 	 SUCCESSFUL PURCHASE: Coke B1 	 $100.00 	 95.00
+2/6/2021 12:29:51 PM 	 FEED MONEY: 	 $0.00 	 0.41
+2/6/2021 12:29:51 PM 	 GIVE CHANGE: 	 $0.41 	 0.00
+2/6/2021 12:29:51 PM 	 FEED MONEY: 	 $0.00 	 0.57
+2/6/2021 12:29:51 PM 	 GIVE CHANGE: 	 $0.57 	 0.00
+2/6/2021 12:29:51 PM 	 FEED MONEY: 	 $0.00 	 0.69
+2/6/2021 12:29:51 PM 	 GIVE CHANGE: 	 $0.69 	 0.00
+2/6/2021 12:29:51 PM 	 FEED MONEY: 	 $0.00 	 4.20
+2/6/2021 12:29:51 PM 	 GIVE CHANGE: 	 $4.20 	 0.00
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 0
+2/6/2021 12:29:51 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 0
+2/6/2021 12:31:51 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:32:24 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:36:37 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:37:02 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:38:01 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:38:36 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:40:56 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:43:53 PM 	 READ STOCK FILE 	 $0.00 	 0
+2/6/2021 12:44:23 PM 	 FEED MONEY: 	 $0.00 	 10.00
+2/6/2021 12:44:28 PM 	 SUCCESSFUL PURCHASE: Potato Crisps A1 	 $10.00 	 6.95
+2/6/2021 12:44:36 PM 	 GIVE CHANGE: 	 $6.95 	 0.00

@@ -34,6 +34,7 @@ namespace Capstone.CLI
             AddOption("Display Vending Machine Items", DisplayItems, "D");
             AddOption("Purchase Items", PurchaseMenu, "P");
             AddOption("Quit", Close, "Q");
+            AddOption("", WriteSalesReport, "W");
 
 
             Configure(cfg =>
@@ -90,6 +91,12 @@ namespace Capstone.CLI
         {
             PurchaseMenu purchaseMenu = new PurchaseMenu(this.machine);
             purchaseMenu.Show();
+            return MenuOptionResult.DoNotWaitAfterMenuSelection;
+        }
+
+        private MenuOptionResult WriteSalesReport()
+        {
+            this.machine.WriteSalesReport();
             return MenuOptionResult.DoNotWaitAfterMenuSelection;
         }
     }

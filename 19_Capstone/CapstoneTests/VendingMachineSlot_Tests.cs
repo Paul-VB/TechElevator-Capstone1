@@ -52,7 +52,7 @@ namespace CapstoneTests
             //act
 
             //assert
-            Assert.AreEqual("Hershey's", slot.ItemName);
+            Assert.AreEqual("Hershey's", slot.ItemDisplayName);
         }
 
         [TestMethod]
@@ -68,7 +68,7 @@ namespace CapstoneTests
             }
 
             //assert
-            Assert.AreEqual(VendingMachineSlot.SOLDOUTNAME, slot.ItemName);
+            Assert.AreEqual(VendingMachineSlot.SOLDOUTNAME, slot.ItemDisplayName);
 
         }
 
