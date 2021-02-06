@@ -11,7 +11,7 @@ using static Capstone.Models.Coins.Coin;
 namespace CapstoneTests
 {
     [TestClass]
-    public class VendingMachineTests
+    public class VendingMachine_Tests
     {
         private List<string> sampleStockFileLines = new List<string>()
             {

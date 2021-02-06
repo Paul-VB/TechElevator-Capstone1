@@ -23,7 +23,7 @@ namespace Capstone.Models.Coins
         }
 
         public CoinGroup Group { get; }
-        public decimal Value { get { return (int)this.Group / 100; } }
+        public decimal Value { get { return (int)this.Group / 100.0m; } }
 
         public Coin(CoinGroup group)
         {

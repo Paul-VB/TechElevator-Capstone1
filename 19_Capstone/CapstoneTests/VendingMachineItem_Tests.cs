@@ -8,7 +8,7 @@ using System.Text;
 namespace CapstoneTests
 {
     [TestClass]
-    public class VendingMachineItemTests
+    public class VendingMachineItem_Tests
     {
         [TestMethod]
         public void EatMessage_Chip_Test()
