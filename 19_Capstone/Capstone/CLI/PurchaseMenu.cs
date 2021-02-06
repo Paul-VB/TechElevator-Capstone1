@@ -58,8 +58,8 @@ namespace Capstone.CLI
         {
             //show the user information
             MainMenu.DisplayLogo();
-            this.machine.PrintCredit();
             this.machine.PrintInventory();
+            this.machine.PrintCredit();
             Console.WriteLine();
 
             //the customer's slot selection (i.e. A1, B2, C1 etc...)
@@ -81,12 +81,12 @@ namespace Capstone.CLI
                 //...redraw the screen. This will update the customer's credit and the inventory being displayed.
                 Console.Clear();
                 MainMenu.DisplayLogo();
-                this.machine.PrintCredit();
                 this.machine.PrintInventory();
+                this.machine.PrintCredit();
                 Console.WriteLine(item.EatMessage);
                 Console.WriteLine($"Enjoy your {item.Name}! ");
                 Console.WriteLine($"Cost: {this.machine.Slots[selection].Price:c}");
-                Console.WriteLine($"Your Remaining Credit: {this.machine.CurrentCredit:c}");
+                //Console.WriteLine($"Your Remaining Credit: {this.machine.CurrentCredit:c}");
             }
             catch (KeyNotFoundException)//invalid item selected
             {
@@ -109,7 +109,8 @@ namespace Capstone.CLI
                 Console.ForegroundColor = oldForegroundColor;
                 Console.WriteLine($"That item costs {machine.Slots[selection].Price:c}. " +
                     $"You only have {this.machine.CurrentCredit:c}. Please insert more money!");
-            } finally
+            }
+            finally
             {
                 Console.ForegroundColor = oldForegroundColor;
                 Console.BackgroundColor = oldBackgroundColor;

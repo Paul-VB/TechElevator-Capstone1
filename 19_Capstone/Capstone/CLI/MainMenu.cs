@@ -96,7 +96,7 @@ namespace Capstone.CLI
 
         private MenuOptionResult WriteSalesReport()
         {
-            this.machine.WriteSalesReport();
+            this.machine.WriteSalesReportToFile(this.machine.GenerateSalesReport());
             return MenuOptionResult.DoNotWaitAfterMenuSelection;
         }
     }

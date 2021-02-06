@@ -11,32 +11,32 @@ namespace Capstone.Models
     /// <seealso cref="System.Collections.Generic.Stack{Capstone.Models.VendingMachineItem}" />
     public class VendingMachineSlot : Stack<VendingMachineItem>
     {
+        public const string DISPLAY_QUANTITY_SOLD_OUT = "SOLD OUT";
+        #region Properties
         public int Capacity { get; } = 5;
 
-        public const string SOLDOUTNAME = "SOLD OUT";
+        public int QuantitySold { get { return this.Capacity - this.Count; } }
+
 
         /// <summary>
-        /// The Price of the item that is being sold in this slot.
+        /// Gets a string that represents the quantity of items remaining in this slot. If there are no more items, returns "SOLD OUT"
         /// </summary>
-        public decimal Price { get; }
-
-        /// <summary>
-        /// Gets the name of the VendingMachineItems stored in this slot. If the slot is empty, returns "SOLD OUT"
-        /// </summary>
-        public string ItemDisplayName
+        public string QuantityRemainingDisplayString
         {
             get
             {
                 if (this.Count == 0)
                 {
-                    return SOLDOUTNAME;
+                    return DISPLAY_QUANTITY_SOLD_OUT;
                 }
-                else
-                {
-                    return this.ItemName;
-                }
+                return this.Count.ToString();
             }
         }
+
+        /// <summary>
+        /// The Price of the item that is being sold in this slot.
+        /// </summary>
+        public decimal Price { get; }
 
         /// <summary>
         /// The name of the item that was initially loaded into this slot
@@ -61,6 +61,9 @@ namespace Capstone.Models
             }
         }
 
+        #endregion
+
+        #region Constructors
         /// <summary>
         /// Initializes a new VendingMachineSlot Object 
         /// </summary>
@@ -93,9 +96,11 @@ namespace Capstone.Models
             this.ItemName = itemName;
         }
 
+        #endregion
+
         public override string ToString()
         {
-            return $"{this.Count}|{this.Price:c}|{this.ItemDisplayName}";
+            return $"{this.QuantityRemainingDisplayString}|{this.Price:c}|{this.ItemName}";
         }
     }
 }

@@ -13,17 +13,18 @@ namespace CapstoneTests
     [TestClass]
     public class VendingMachineTests
     {
-        [TestMethod]
-        public void Restock_Test_GoodData()
-        {
-            //arrange
-            List<string> stockLines = new List<string>()
+        private List<string> sampleStockFileLines = new List<string>()
             {
                 "A1|M&Ms|3.05|Candy",
                 "A2|Doritos|4.20|Chip",
                 "B1|Sprite|2.75|Drink",
                 "B2|Big Chew|3.65|Gum"
             };
+        [TestMethod]
+        public void Restock_Test_GoodData()
+        {
+            //arrange
+            List<string> stockLines = new List<string>(sampleStockFileLines);
             VendingMachine testMachine = new VendingMachine();
 
             //act
@@ -107,6 +108,42 @@ namespace CapstoneTests
             Assert.AreEqual(testMachine.Slots[slotTag].Capacity - 1, testMachine.Slots[slotTag].Count,
                 $"The quantity of items in slot {slotTag} didn't change after we tried to dispense");
 
+        }
+
+        [TestMethod]
+        public void GenerateSalesReport_Test()
+        {
+            //arrange
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(new List<string>(sampleStockFileLines));
+            testMachine.TakeMoney(50.00m);
+            //sell 3 M&Ms
+            testMachine.DispenseItem("A1");
+            testMachine.DispenseItem("A1");
+            //sell 1 Doritos
+            testMachine.DispenseItem("A2");
+            //sell 5 sprites, thirsty boys
+            testMachine.DispenseItem("B1");
+            testMachine.DispenseItem("B1");
+            testMachine.DispenseItem("B1");
+            testMachine.DispenseItem("B1");
+            testMachine.DispenseItem("B1");
+            //sell no gum
+
+            List<string> expectedSalesReportLines = new List<string>()
+            {
+                "M&Ms|2",
+                "Doritos|1",
+                "Sprite|5",
+                "Big Chew|0",
+                "",
+                "$24.05"
+            };
+            //act
+            List<string> resultSalesReportLines = testMachine.GenerateSalesReport();
+
+            //assert
+            CollectionAssert.AreEquivalent(expectedSalesReportLines, resultSalesReportLines);
         }
 
         [TestMethod]

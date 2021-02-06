@@ -52,11 +52,24 @@ namespace CapstoneTests
             //act
 
             //assert
-            Assert.AreEqual("Hershey's", slot.ItemDisplayName);
+            Assert.AreEqual("Hershey's", slot.ItemName);
         }
 
         [TestMethod]
-        public void ItemName_SoldOut_Test()
+        public void QuantityRemaining_test()
+        {
+            //arrange
+            VendingMachineSlot slot = SetupHershys();
+
+            //act
+            slot.Pop();
+
+            //assert
+            Assert.AreEqual("4",slot.QuantityRemainingDisplayString);
+        }
+
+        [TestMethod]
+        public void QuantityRemaining_SoldOut_Test()
         {
             //arrange
             VendingMachineSlot slot = SetupHershys();
@@ -68,7 +81,7 @@ namespace CapstoneTests
             }
 
             //assert
-            Assert.AreEqual(VendingMachineSlot.SOLDOUTNAME, slot.ItemDisplayName);
+            Assert.AreEqual(VendingMachineSlot.DISPLAY_QUANTITY_SOLD_OUT, slot.QuantityRemainingDisplayString);
 
         }
 
@@ -129,7 +142,7 @@ namespace CapstoneTests
             string result = slot.ToString();
 
             //assert
-            Assert.AreEqual($"0|$2.00|{VendingMachineSlot.SOLDOUTNAME}", result);
+            Assert.AreEqual($"{VendingMachineSlot.DISPLAY_QUANTITY_SOLD_OUT}|$2.00|Hershey's", result);
 
         }
 

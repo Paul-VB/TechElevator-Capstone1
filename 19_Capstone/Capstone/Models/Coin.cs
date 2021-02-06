@@ -17,6 +17,7 @@ namespace Capstone.Models.Coins
             Nickel = 5,
             Dime = 10,
             Quarter = 25
+            //HalfDollar = 50
 
 
         }

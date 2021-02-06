@@ -260,12 +260,42 @@ namespace Capstone.Models
         {
             using (StreamWriter writer = new StreamWriter(AUDITFILEPATH, true))
             {
-                string logEvent = $"{DateTime.Now} \t {eventDescription} \t {startCredit:c} \t {endCredit}";
+                string logEvent = $"{DateTime.Now} \t {eventDescription} \t {startCredit:c} \t {endCredit:c}";
                 writer.WriteLine(logEvent);
             }
         }
 
-        public void WriteSalesReport()
+        /// <summary>
+        /// Generates a sales report in the form of a list of strings.
+        /// Each string in the list represents the item and how many of them were sold. The gross dollar amount sold is added as the last string
+        /// </summary>
+        public List<string> GenerateSalesReport()
+        {
+            //the list of strings we will return
+            List<string> salesReportLines = new List<string>();
+
+            //keep track of the gross sales. We need to add this to the list at the end
+            decimal grossSales = 0;
+
+            //loop over each slot in the vending machine
+            foreach (VendingMachineSlot slot in this.Slots.Values)
+            {
+                //add this to the list: ItemName|QuantitySold
+                salesReportLines.Add($"{slot.ItemName}|{slot.QuantitySold}");
+
+                //update the gross sales
+                grossSales += (slot.Price * slot.QuantitySold);
+            }
+
+            //add a blank line to the list because the ReadMe demands it
+            salesReportLines.Add("");
+
+            //add the gross sales to the list
+            salesReportLines.Add($"{grossSales:c}");
+
+            return salesReportLines;
+        }
+        public void WriteSalesReportToFile(List<string> salesReportLines)
         {
             //create a new file path that includes the current datetime, so each sales report is unique
             string folderFriendlyDateStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
@@ -274,9 +304,9 @@ namespace Capstone.Models
             //write out to the new salesreport file
             using (StreamWriter writer = new StreamWriter(fullSalesReportPath))
             {
-                foreach (VendingMachineSlot slot in this.Slots.Values)
+                foreach(string line in salesReportLines)
                 {
-                    writer.WriteLine($"{slot.ItemName}|{slot.Capacity-slot.Count}");
+                    writer.WriteLine(line);
                 }
             }
         }
@@ -338,7 +368,7 @@ namespace Capstone.Models
                 string slotKey = kvp.Key;
                 int remaining = kvp.Value.Count;
                 decimal cost = kvp.Value.Price;
-                string itemName = kvp.Value.ItemDisplayName;
+                string itemName = kvp.Value.ItemName;
                 //Prints each line piece by piece with fancy formatting
                 //print slot tag, (A1, B2 etc...)
                 Console.ForegroundColor = normalColor;
@@ -352,7 +382,7 @@ namespace Capstone.Models
                 //print quantity remaining
                 if (remaining == 0) { Console.ForegroundColor = soldOutColor; }
                 else if (remaining == 1) { Console.ForegroundColor = lowStockColor; }
-                Console.Write(string.Format(" {0,9} ", remaining));
+                Console.Write(string.Format(" {0,9} ", kvp.Value.QuantityRemainingDisplayString));
                 Console.ForegroundColor = dividerColor;
                 Console.Write("|");
                 Console.ForegroundColor = normalColor;
