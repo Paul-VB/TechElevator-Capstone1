@@ -63,7 +63,11 @@ namespace Capstone.CLI
             Console.WriteLine();
 
             //the customer's slot selection (i.e. A1, B2, C1 etc...)
-            string selection = GetString("Please enter your selection: ").ToUpper();
+            string selection = GetString("Please enter your selection, (leave empty to cancel): ",true).ToUpper();
+            if(selection == "")
+            {
+                return MenuOptionResult.DoNotWaitAfterMenuSelection;
+            }
 
             //the item we will try to return to the customer
             VendingMachineItem item = null;
@@ -109,6 +113,7 @@ namespace Capstone.CLI
                 Console.ForegroundColor = oldForegroundColor;
                 Console.WriteLine($"That item costs {machine.Slots[selection].Price:c}. " +
                     $"You only have {this.machine.CurrentCredit:c}. Please insert more money!");
+                Console.WriteLine("Sorry, Link. I can't give credit. Come back when you're a little... mmmmm... richer!");
             }
             finally
             {
