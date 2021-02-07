@@ -1,4 +1,5 @@
-﻿using Capstone.Models.Coins;
+﻿
+using Capstone.Models.Coins;
 using Capstone.Models.CustomExceptions;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,8 @@ namespace Capstone.Models
         /// </summary>
         /// <param name="pathToStockFile">The path to the input file.</param>
         /// <returns>The lines of the file as a List of strings</returns>
+        /// 
+        //todo: try catch for reading file io error
         public List<string> ReadStockFile(string pathToStockFile = STOCKFILEPATH)
         {
             decimal startCredit = CurrentCredit;
@@ -160,7 +163,7 @@ namespace Capstone.Models
 
 
 
-
+        //todo: add error checking so you cant take negative money
         public void TakeMoney(decimal moneyToTake)
         {
             decimal startCredit = CurrentCredit;
@@ -173,6 +176,8 @@ namespace Capstone.Models
         /// </summary>
         /// <param name="slotIdentifier">The name of the VendingMachineSlot to take from (i.e. "A1", "B1", "C3" etc..)</param>
         /// <returns></returns>
+        /// <throws></throws>
+        //todo: update documentation to indicate that this method can throw errors
         public VendingMachineItem DispenseItem(string slotIdentifier)
         {
             decimal startCredit = CurrentCredit;
@@ -254,6 +259,8 @@ namespace Capstone.Models
         /// <param name="startCredit">The start credit.</param>
         /// <param name="endCredit">The end credit.</param>
         /// <returns></returns>
+        /// 
+        //todo: try catch for file IO errors
         private void LogToAuditFile(string eventDescription, decimal startCredit, decimal endCredit)
         {
             using (StreamWriter writer = new StreamWriter(AUDITFILEPATH, true))
@@ -293,6 +300,13 @@ namespace Capstone.Models
 
             return salesReportLines;
         }
+
+        /// <summary>
+        /// Writes the sales report to a new file.
+        /// </summary>
+        /// <param name="salesReportLines">The sales report lines.</param>
+        /// 
+        //todo add try catch for file error io thingy
         public void WriteSalesReportToFile(List<string> salesReportLines)
         {
             //create a new file path that includes the current datetime, so each sales report is unique

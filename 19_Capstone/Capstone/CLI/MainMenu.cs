@@ -35,6 +35,7 @@ namespace Capstone.CLI
             AddOption("Purchase Items", PurchaseMenu, "P");
             AddOption("Quit", Close, "Q");
             AddOption("", WriteSalesReport, "W");
+            //todo: add dynamic menu option by overriding RebuildMenuOptions()
 
 
             Configure(cfg =>

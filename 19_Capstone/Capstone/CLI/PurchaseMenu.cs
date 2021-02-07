@@ -85,7 +85,10 @@ namespace Capstone.CLI
                 //...redraw the screen. This will update the customer's credit and the inventory being displayed.
                 Console.Clear();
                 MainMenu.DisplayLogo();
+                //reprint the updated inventory. One of the items will have 1 fewer
                 this.machine.PrintInventory();
+
+                //reprint the updated credit that the user has
                 this.machine.PrintCredit();
                 Console.WriteLine(item.EatMessage);
                 Console.WriteLine($"Enjoy your {item.Name}! ");

@@ -13,6 +13,7 @@ namespace CapstoneTests
     [TestClass]
     public class VendingMachine_Tests
     {
+        //create an arbitrary list of strings
         private List<string> sampleStockFileLines = new List<string>()
             {
                 "A1|M&Ms|3.05|Candy",
@@ -28,7 +29,7 @@ namespace CapstoneTests
             VendingMachine testMachine = new VendingMachine();
 
             //act
-            testMachine.Restock(stockLines);
+            testMachine.Restock(stockLines);//restock from the arbitrary list
 
             //assert
             Assert.AreEqual(stockLines.Count, testMachine.Slots.Count, "Not all stockLines were added as slots!");
@@ -123,16 +124,10 @@ namespace CapstoneTests
         public void DispenseItem_Test()
         {
             //arrange
-            List<string> stockLines = new List<string>()
-            {
-                "A1|M&Ms|3.05|Candy",
-                "A2|Doritos|4.20|Chip",
-                "B1|Coke|5.00|Drink",
-                "B2|Big Chew|3.65|Gum"
-            };
             string slotTag = "B1";
             VendingMachine testMachine = new VendingMachine();
-            testMachine.Restock(stockLines);
+            testMachine.Restock(new List<string>(sampleStockFileLines));//restock from arbitrary list
+
             testMachine.TakeMoney(100.00m);
 
             //act
@@ -140,10 +135,58 @@ namespace CapstoneTests
 
             //assert
             Assert.IsTrue(soda is Drink, "The machine dispensed the wrong item!");
-            Assert.AreEqual("Coke", soda.Name, "The Machine dispensed a drink, but it was not the right drink!");
-            Assert.AreEqual(95.00m, testMachine.CurrentCredit, "The price of the soda was not deducted from the current Credit!");
+            Assert.AreEqual("Sprite", soda.Name, "The Machine dispensed a drink, but it was not the right drink!");
+            Assert.AreEqual(97.25m, testMachine.CurrentCredit, "The price of the soda was not deducted from the current Credit!");
             Assert.AreEqual(testMachine.Slots[slotTag].Capacity - 1, testMachine.Slots[slotTag].Count,
                 $"The quantity of items in slot {slotTag} didn't change after we tried to dispense");
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(KeyNotFoundException))]
+        public void DispenseItem_Test_SlotNotFound()
+        {
+            //arrange
+            string slotTag = "z9";
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(new List<string>(sampleStockFileLines));
+            testMachine.TakeMoney(100.00m);
+
+            //act
+            VendingMachineItem soda = testMachine.DispenseItem(slotTag);
+
+        }
+        [TestMethod]
+        [ExpectedException(typeof(InsufficientFundsException))]
+        public void DispenseItem_Test_InsufficientFunds()
+        {
+            //arrange
+            string slotTag = "B2";
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(new List<string>(sampleStockFileLines));
+
+            //act
+            VendingMachineItem soda = testMachine.DispenseItem(slotTag);
+
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DispenseItem_Test_ItemSoldOut()
+        {
+            //arrange
+            string slotTag = "B1";
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(new List<string>(sampleStockFileLines));
+            testMachine.TakeMoney(40.00m);
+            //act
+            while (testMachine.Slots[slotTag].Count > 0)
+            {
+                testMachine.DispenseItem(slotTag);
+            }
+
+            //act
+            VendingMachineItem soda = testMachine.DispenseItem(slotTag);
 
         }
 

@@ -40,6 +40,7 @@ namespace Capstone.Models
 
         /// <summary>
         /// The name of the item that was initially loaded into this slot
+        /// (i.e. Hershey's, Snickers, Sprite, etc.)
         /// </summary>
         public string ItemName { get; } = "";
 

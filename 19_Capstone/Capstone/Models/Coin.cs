@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Capstone.Models.Coins
 {
-
     public class Coin 
     {
         /// <summary>
@@ -18,8 +17,6 @@ namespace Capstone.Models.Coins
             Dime = 10,
             Quarter = 25
             //HalfDollar = 50
-
-
         }
 
         public CoinGroup Group { get; }
