@@ -244,7 +244,7 @@ namespace Capstone.Models
         {
             decimal startCredit = CurrentCredit;
             slotIdentifier = slotIdentifier.ToUpper();
-            if(slotIdentifier == SALES_REPORTS_PASSCODE)
+            if (slotIdentifier == SALES_REPORTS_PASSCODE)
             {
                 this.SalesreportsUnlocked = true;
 
@@ -278,7 +278,8 @@ namespace Capstone.Models
             {
                 LogToFile(ERROR_LOG_FILE_PATH, $"INSUFFICIENT FUNDS: {this.slots[slotIdentifier].Peek().Name} {slotIdentifier}", startCredit, CurrentCredit);
                 throw new InsufficientFundsException(e.Message, e);
-            }catch (SalesReportsUnlockedException e)//thrown if the user unlocked the sales report menu option.
+            }
+            catch (SalesReportsUnlockedException e)//thrown if the user unlocked the sales report menu option.
             {
                 LogToFile(ERROR_LOG_FILE_PATH, "SALES REPORTS UNLOCKED: ", startCredit, CurrentCredit);
                 throw new SalesReportsUnlockedException(e.Message, e);
@@ -403,7 +404,7 @@ namespace Capstone.Models
             //keep trying to write to the file until we successfully do so.
             bool successfulReportWrite = false;
             while (!successfulReportWrite)
-
+            {
                 try
                 {
                     //write out to the new salesreport file
@@ -423,10 +424,8 @@ namespace Capstone.Models
                     Console.Write("Press any key to try again...");
                     Console.Read();
                 }
+            }
         }
-
-
-
         #endregion
 
         #region UI Direct print methods

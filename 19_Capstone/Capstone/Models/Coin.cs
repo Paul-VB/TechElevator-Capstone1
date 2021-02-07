@@ -7,7 +7,7 @@ namespace Capstone.Models.Coins
     /// <summary>
     /// Each instance of coin represents a literal, physical coin
     /// </summary>
-    public class Coin 
+    public class Coin
     {
         /// <summary>
         /// Represents all the types of coins that exist. The values are in <i>CENTS</i>, not <i>DOLLARS</i><br></br>
@@ -15,7 +15,6 @@ namespace Capstone.Models.Coins
         /// </summary>
         public enum CoinTypes
         {
-
             Penny = 1,
             Nickel = 5,
             Dime = 10,
@@ -36,7 +35,6 @@ namespace Capstone.Models.Coins
         /// Initializes a new instance of the <see cref="Coin" /> class.
         /// </summary>
         /// <param name="coinType">The type of coin.</param>
-
         public Coin(CoinTypes coinType)
         {
             this.CoinType = coinType;
