@@ -10,8 +10,15 @@ using static Capstone.Models.Coins.Coin;
 namespace Capstone.CLI
 {
 
+    /// <summary>
+    /// The Purchase sub-menu for the Vending Machine
+    /// </summary>
+    /// <seealso cref="MenuFramework.ConsoleMenu" />
     class PurchaseMenu : ConsoleMenu
     {
+        /// <summary>
+        /// The Vending machine we will be working with.
+        /// </summary>
         private VendingMachine machine;
 
         /// <summary>
@@ -31,6 +38,7 @@ namespace Capstone.CLI
                 cfg.Title = "Purchase Menu";
             });
         }
+
         protected override void OnBeforeShow()
         {
             MainMenu.DisplayLogo();
@@ -44,6 +52,7 @@ namespace Capstone.CLI
         /// <summary>
         /// Opens a submenu where the user may feed in credits.
         /// </summary>
+        /// <returns></returns>
         private MenuOptionResult FeedMoneyMenu()
         {
             FeedMoneyMenu feedMoney = new FeedMoneyMenu(this.machine);
@@ -54,6 +63,7 @@ namespace Capstone.CLI
         /// <summary>
         /// Prompts the customer to enter their selection
         /// </summary>
+        /// <returns></returns>
         private MenuOptionResult SelectProduct()
         {
             //show the user information
@@ -117,6 +127,11 @@ namespace Capstone.CLI
                 Console.WriteLine($"That item costs {machine.Slots[selection].Price:c}. " +
                     $"You only have {this.machine.CurrentCredit:c}. Please insert more money!");
                 Console.WriteLine("Sorry, Link. I can't give credit. Come back when you're a little... mmmmm... richer!");
+            }catch (SalesReportsUnlockedException)//sales reports menu unlocked
+            {
+                Console.ForegroundColor = errorColor;
+                Console.WriteLine("Passcode Accepted. The Sales Reports option has been unlocked in the Main Menu.");
+                Console.ForegroundColor = oldForegroundColor;
             }
             finally
             {
@@ -130,6 +145,7 @@ namespace Capstone.CLI
         /// <summary>
         /// Gets the change.
         /// </summary>
+        /// <returns></returns>
         private MenuOptionResult GetChange()
         {
             MainMenu.DisplayLogo();

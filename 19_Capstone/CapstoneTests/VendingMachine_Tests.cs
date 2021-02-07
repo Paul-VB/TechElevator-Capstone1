@@ -156,6 +156,21 @@ namespace CapstoneTests
             VendingMachineItem soda = testMachine.DispenseItem(slotTag);
 
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(SalesReportsUnlockedException))]
+        public void DispenseItem_Test_SalesMenuUnlocked()
+        {
+            //arrange
+            string slotTag = VendingMachine.SALES_REPORTS_PASSCODE;
+            VendingMachine testMachine = new VendingMachine();
+            testMachine.Restock(new List<string>(sampleStockFileLines));
+            testMachine.TakeMoney(100.00m);
+
+            //act
+            VendingMachineItem soda = testMachine.DispenseItem(slotTag);
+        }
+
         [TestMethod]
         [ExpectedException(typeof(InsufficientFundsException))]
         public void DispenseItem_Test_InsufficientFunds()

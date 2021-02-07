@@ -1,4 +1,4 @@
-Potato Crisps|1
+Potato Crisps|0
 Stackers|0
 Grain Waves|0
 Cloud Popcorn|0
@@ -13,6 +13,6 @@ Heavy|0
 U-Chews|0
 Little League Chew|0
 Chiclets|0
-Triplemint|1
+Triplemint|0
 
-$3.80
+$0.00

@@ -7,14 +7,27 @@ using System.Text;
 
 namespace Capstone.CLI
 {
+    /// <summary>
+    /// The Main Menu for the vending machine
+    /// </summary>
+    /// <seealso cref="MenuFramework.ConsoleMenu" />
     public class MainMenu : ConsoleMenu
     {
         /*a few global color constants that should apply to all menus and sub-menus. 
          * This will keep the look of our program consistent
          */
+        /// <summary>
+        /// The menu item text foreground color
+        /// </summary>
         public static ConsoleColor GlobalItemForegroundColor = ConsoleColor.Gray;
+        /// <summary>
+        /// The global selected item foreground color
+        /// </summary>
         public static ConsoleColor GlobalSelectedItemForegroundColor = ConsoleColor.Yellow;
 
+        /// <summary>
+        /// The Vending machine we will be working with.
+        /// </summary>
         private VendingMachine machine;
         /*******************************************************************************
          * Private data:
@@ -25,19 +38,12 @@ namespace Capstone.CLI
          * ****************************************************************************/
 
         // NOTE: This constructor could be changed to accept arguments needed by the menu
+        /// <summary>
+        /// Initializes a new instance of the Main Menu
+        /// </summary>
         public MainMenu(VendingMachine machine)
         {
             this.machine = machine;//initialize the vending machine
-
-
-            // Add Sample menu options
-            AddOption("Display Vending Machine Items", DisplayItems, "D");
-            AddOption("Purchase Items", PurchaseMenu, "P");
-            AddOption("Quit", Close, "Q");
-            AddOption("", WriteSalesReport, "W");
-            //todo: add dynamic menu option by overriding RebuildMenuOptions()
-
-
             Configure(cfg =>
            {
                cfg.ItemForegroundColor = GlobalItemForegroundColor;
@@ -48,6 +54,23 @@ namespace Capstone.CLI
            });
         }
 
+        /// <summary>
+        /// Basically just re-drawing the menu by overriding the <see cref="ConsoleMenu.RebuildMenuOptions" /> method.
+        /// </summary>
+        protected override void RebuildMenuOptions()
+        {
+            base.ClearOptions();
+            AddOption("Display Vending Machine Items", DisplayItems, "D");
+            AddOption("Purchase Items", PurchaseMenu, "P");
+            AddOption("Quit", Close, "Q");
+            if (this.machine.SalesreportsUnlocked)
+            {
+                AddOption("Generate Sales Report", WriteSalesReport, "W");
+            }
+        }
+        /// <summary>
+        /// We want to show the big pretty logo before each menu.
+        /// </summary>
         protected override void OnBeforeShow()
         {
             DisplayLogo();
@@ -70,6 +93,9 @@ namespace Capstone.CLI
             Console.BackgroundColor = oldBackgroundColor;
         }
 
+        /// <summary>
+        /// Gives a small little message to the user at the end of the menu.
+        /// </summary>
         protected override void OnAfterShow()
         {
             Console.WriteLine();
@@ -88,6 +114,10 @@ namespace Capstone.CLI
             return MenuOptionResult.WaitAfterMenuSelection;
         }
 
+        /// <summary>
+        /// Opens the Purchase sub-menu
+        /// </summary>
+        /// <returns></returns>
         private MenuOptionResult PurchaseMenu()
         {
             PurchaseMenu purchaseMenu = new PurchaseMenu(this.machine);
@@ -95,10 +125,15 @@ namespace Capstone.CLI
             return MenuOptionResult.DoNotWaitAfterMenuSelection;
         }
 
+        /// <summary>
+        /// Writes a new sales report to a file.
+        /// </summary>
+        /// <returns></returns>
         private MenuOptionResult WriteSalesReport()
         {
             this.machine.WriteSalesReportToFile(this.machine.GenerateSalesReport());
-            return MenuOptionResult.DoNotWaitAfterMenuSelection;
+            Console.WriteLine("Sales Report creation successful.");
+            return MenuOptionResult.WaitAfterMenuSelection;
         }
     }
 }
