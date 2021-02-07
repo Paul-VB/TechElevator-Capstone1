@@ -151,8 +151,8 @@ namespace Capstone.CLI
             MainMenu.DisplayLogo();
             //print out the change
             Console.WriteLine("Thank you for shopping with us today! Here is your change:");
-            Dictionary<CoinGroup, List<Coin>> change = this.machine.GiveChange();
-            foreach (CoinGroup group in change.Keys)
+            Dictionary<CoinTypes, List<Coin>> change = this.machine.GiveChange();
+            foreach (CoinTypes group in change.Keys)
             {
                 Console.WriteLine($"Quantity of {group}: {change[group].Count}");
             }

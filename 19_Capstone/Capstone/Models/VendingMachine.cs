@@ -292,20 +292,20 @@ namespace Capstone.Models
         /// A Dictionary of coinNames and coins
         /// </returns>
         // This method does have unit tests! 
-        public Dictionary<CoinGroup, List<Coin>> GiveChange()
+        public Dictionary<CoinTypes, List<Coin>> GiveChange()
         {
             decimal startCredit = CurrentCredit;
             //the dictionary of coinGroups and Coins we will return.
-            Dictionary<CoinGroup, List<Coin>> change = new Dictionary<CoinGroup, List<Coin>>();
+            Dictionary<CoinTypes, List<Coin>> change = new Dictionary<CoinTypes, List<Coin>>();
 
             //get a sorted list of all coinGroups that exist. We need largest to smallest.
-            List<CoinGroup> sortedGroups = new List<CoinGroup>((CoinGroup[])Enum.GetValues(typeof(CoinGroup)));
+            List<CoinTypes> sortedGroups = new List<CoinTypes>((CoinTypes[])Enum.GetValues(typeof(CoinTypes)));
             sortedGroups.Sort();
             sortedGroups.Reverse();
 
 
             //for each type of coin that exists (i.e. Pennies, Nickels, Dimes etc...
-            foreach (CoinGroup currCoinGroup in sortedGroups)
+            foreach (CoinTypes currCoinGroup in sortedGroups)
             {
 
                 //initialize the coinGroups list

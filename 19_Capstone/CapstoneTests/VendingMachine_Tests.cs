@@ -247,64 +247,64 @@ namespace CapstoneTests
         {
             GiveChange_TestHelper(
                 0.41m,
-                new Dictionary<CoinGroup, int>()
+                new Dictionary<CoinTypes, int>()
                 {
-                    { CoinGroup.Penny,1 },
-                    { CoinGroup.Nickel,1 },
-                    { CoinGroup.Dime,1 },
-                    { CoinGroup.Quarter,1 }
+                    { CoinTypes.Penny,1 },
+                    { CoinTypes.Nickel,1 },
+                    { CoinTypes.Dime,1 },
+                    { CoinTypes.Quarter,1 }
                 },
                 DisplayName: "One of each coin");
 
             GiveChange_TestHelper(
                 0.57m,
-                new Dictionary<CoinGroup, int>()
+                new Dictionary<CoinTypes, int>()
                 {
-                    { CoinGroup.Penny,2 },
-                    { CoinGroup.Nickel,1 },
-                    { CoinGroup.Dime,0 },
-                    { CoinGroup.Quarter,2 }
+                    { CoinTypes.Penny,2 },
+                    { CoinTypes.Nickel,1 },
+                    { CoinTypes.Dime,0 },
+                    { CoinTypes.Quarter,2 }
                 },
                 DisplayName: "2P, 1N, 0D, 2Q");
 
             GiveChange_TestHelper(
                 0.69m,
-                new Dictionary<CoinGroup, int>()
+                new Dictionary<CoinTypes, int>()
                 {
-                    { CoinGroup.Penny,4 },
-                    { CoinGroup.Nickel,1 },
-                    { CoinGroup.Dime,1 },
-                    { CoinGroup.Quarter,2 }
+                    { CoinTypes.Penny,4 },
+                    { CoinTypes.Nickel,1 },
+                    { CoinTypes.Dime,1 },
+                    { CoinTypes.Quarter,2 }
                 },
                 DisplayName: "4P, 1N, 1D, 2Q");
 
             GiveChange_TestHelper(
                 4.20m,
-                new Dictionary<CoinGroup, int>()
+                new Dictionary<CoinTypes, int>()
                 {
-                    { CoinGroup.Penny,0 },
-                    { CoinGroup.Nickel,0 },
-                    { CoinGroup.Dime,2 },
-                    { CoinGroup.Quarter,16 }
+                    { CoinTypes.Penny,0 },
+                    { CoinTypes.Nickel,0 },
+                    { CoinTypes.Dime,2 },
+                    { CoinTypes.Quarter,16 }
                 },
                     DisplayName: "0P, 0N, 2D, 16Q");//reverse coinstar
 
 
         }
 
-        private void GiveChange_TestHelper(decimal startingCredit, Dictionary<CoinGroup, int> expectedChange, string DisplayName = "")
+        private void GiveChange_TestHelper(decimal startingCredit, Dictionary<CoinTypes, int> expectedChange, string DisplayName = "")
         {
             //arrange
             VendingMachine testMachine = new VendingMachine();
             testMachine.TakeMoney(startingCredit);
 
             //act
-            Dictionary<CoinGroup, List<Coin>> resultChange = testMachine.GiveChange();
+            Dictionary<CoinTypes, List<Coin>> resultChange = testMachine.GiveChange();
 
             //assert
             CollectionAssert.AreEquivalent(expectedChange.Keys, resultChange.Keys,
                 $"{DisplayName} test failed!: The resulting change does not have all the correct Coin Types!");
-            foreach (CoinGroup group in expectedChange.Keys)
+            foreach (CoinTypes group in expectedChange.Keys)
             {
                 Assert.AreEqual(expectedChange[group], resultChange[group].Count, $"{DisplayName} test failed!: Quantity of {group} is incorrect!");
             }

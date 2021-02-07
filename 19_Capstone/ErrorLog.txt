@@ -33,3 +33,15 @@
 2/7/2021 1:25:10 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
 2/7/2021 1:25:37 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
 2/7/2021 1:28:36 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 INSUFFICIENT FUNDS: Big Chew B2 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 ITEM SOLD OUT: B1 	 $26.25 	 $26.25
+2/7/2021 1:39:52 PM 	 SLOT NOT FOUND: Z9 	 $100.00 	 $100.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 $0.00

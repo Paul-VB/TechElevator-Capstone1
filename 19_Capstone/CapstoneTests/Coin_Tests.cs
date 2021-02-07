@@ -13,7 +13,7 @@ namespace CapstoneTests
         public void Coin_Penny_Test()
         {
             //arrange
-            Coin penny = new Coin(Coin.CoinGroup.Penny);
+            Coin penny = new Coin(Coin.CoinTypes.Penny);
 
             //act
             decimal resultValue = penny.Value;
@@ -27,7 +27,7 @@ namespace CapstoneTests
         public void Coin_Nickel_Test()
         {
             //arrange
-            Coin nickel = new Coin(Coin.CoinGroup.Nickel);
+            Coin nickel = new Coin(Coin.CoinTypes.Nickel);
 
             //act
             decimal resultValue = nickel.Value;
@@ -41,7 +41,7 @@ namespace CapstoneTests
         public void Coin_Dime_Test()
         {
             //arrange
-            Coin dime = new Coin(Coin.CoinGroup.Dime);
+            Coin dime = new Coin(Coin.CoinTypes.Dime);
 
             //act
             decimal resultValue = dime.Value;
@@ -55,7 +55,7 @@ namespace CapstoneTests
         public void Coin_Quarter_Test()
         {
             //arrange
-            Coin quarter = new Coin(Coin.CoinGroup.Quarter);
+            Coin quarter = new Coin(Coin.CoinTypes.Quarter);
 
             //act
             decimal resultValue = quarter.Value;
