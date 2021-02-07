@@ -11,16 +11,28 @@ namespace Capstone.Models
     /// <seealso cref="System.Collections.Generic.Stack{Capstone.Models.VendingMachineItem}" />
     public class VendingMachineSlot : Stack<VendingMachineItem>
     {
-        public const string DISPLAY_QUANTITY_SOLD_OUT = "SOLD OUT";
         #region Properties
+        /// <summary>
+        /// The string that will be displayed for the vending machine's quantity remaining when there are no items left
+        /// </summary>
+        public const string DISPLAY_QUANTITY_SOLD_OUT = "SOLD OUT";
+
+        /// <summary>
+        /// The max number of <see cref="VendingMachineItem"/>s that this vending machine slot can hold.
+        /// </summary>
         public int Capacity { get; } = 5;
 
+        /// <summary>
+        /// Gets the quantity of items sold from this Vending Machine Slot
+        /// </summary>
         public int QuantitySold { get { return this.Capacity - this.Count; } }
-
 
         /// <summary>
         /// Gets a string that represents the quantity of items remaining in this slot. If there are no more items, returns "SOLD OUT"
         /// </summary>
+        /// <value>
+        /// The quantity remaining display string.
+        /// </value>
         public string QuantityRemainingDisplayString
         {
             get
@@ -36,17 +48,26 @@ namespace Capstone.Models
         /// <summary>
         /// The Price of the item that is being sold in this slot.
         /// </summary>
+        /// <value>
+        /// The price.
+        /// </value>
         public decimal Price { get; }
 
         /// <summary>
         /// The name of the item that was initially loaded into this slot
         /// (i.e. Hershey's, Snickers, Sprite, etc.)
         /// </summary>
+        /// <value>
+        /// The name of the item.
+        /// </value>
         public string ItemName { get; } = "";
 
         /// <summary>
         /// Gets the category of the VendingMachineItem held inside this slot (i.e. Gum, Drink, Candy etc...) or null if the slot is empty
         /// </summary>
+        /// <value>
+        /// The item category.
+        /// </value>
         public string ItemCategory
         {
             get
@@ -66,11 +87,12 @@ namespace Capstone.Models
 
         #region Constructors
         /// <summary>
-        /// Initializes a new VendingMachineSlot Object 
+        /// Initializes a new VendingMachineSlot Object
         /// </summary>
-        /// <param name="itemName">The Name of the item (i.e. Hershey's, Snickers, etc.) </param>
+        /// <param name="itemName">The Name of the item (i.e. Hershey's, Snickers, etc.)</param>
         /// <param name="price">The price.</param>
         /// <param name="itemCategory">The item category (i.e "Candy", "Gum" etc.).</param>
+        /// <exception cref="InvalidTypeException">Invalid Item Category! {itemCategory} is not a subclass of VendingMachineItem</exception>
         public VendingMachineSlot(string itemName, decimal price, string itemCategory)
         {
             #region invalid data checking
@@ -99,6 +121,12 @@ namespace Capstone.Models
 
         #endregion
 
+        /// <summary>
+        /// Gets a string representation of this VendingMachineSlot
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String" /> that represents this instance.
+        /// </returns>
         public override string ToString()
         {
             return $"{this.QuantityRemainingDisplayString}|{this.Price:c}|{this.ItemName}";
