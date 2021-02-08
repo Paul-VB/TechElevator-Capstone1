@@ -15,28 +15,34 @@ namespace Capstone.Models
     public class VendingMachine
     {
 
+
         #region Constants
+        /// <summary>
+        /// The prefix to prepend to all the file paths.
+        /// </summary>
+        const string FILE_PATH_PREFIX = @"..\..\..\..\";
+
         /// <summary>
         /// The default path to the CSV file that holds the info on what items and prices to restock the machine with
         /// </summary>
-        const string STOCK_FILE_PATH = @"..\..\..\..\vendingmachine.csv";
+        readonly string STOCK_FILE_PATH = $"{FILE_PATH_PREFIX}vendingmachine.csv";
 
         //the path to the file where all events are logged
         /// <summary>
         /// The default path to the audit file
         /// </summary>
-        const string AUDIT_LOG_FILE_PATH = @"..\..\..\..\Log.txt";
+        readonly string AUDIT_LOG_FILE_PATH = $"{FILE_PATH_PREFIX}Log.txt";
 
         /// <summary>
         /// The default path to the error log file
         /// </summary>
-        const string ERROR_LOG_FILE_PATH = @"..\..\..\..\ErrorLog.txt";
+        readonly string ERROR_LOG_FILE_PATH = $"{FILE_PATH_PREFIX}ErrorLog.txt";
 
         //the path to where the salesReport files will go
         /// <summary>
         /// The default path to the Sales Reports sub-folder
         /// </summary>
-        const string SALES_REPORTS_FOLDER = @"..\..\..\..\SalesReports\";
+        readonly string SALES_REPORTS_FOLDER = $@"{FILE_PATH_PREFIX}SalesReports\";
 
         /// <summary>
         /// The pass-code required to unlock the secret sales report menu for the Vending Machine
@@ -421,7 +427,7 @@ namespace Capstone.Models
                 {
                     Console.WriteLine($"Whoops! i can't write a sales report to {salesReportFullPath}!");
                     Console.WriteLine("Please make sure that file is not open in any other programs");
-                    Console.Write("Press any key to try again...");
+                    Console.Write("Press any key to try aga.in...");
                     Console.Read();
                 }
             }

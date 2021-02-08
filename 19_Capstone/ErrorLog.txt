@@ -45,3 +45,11 @@
 2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
 2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
 2/7/2021 1:39:52 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 $0.00
+2/7/2021 2:57:58 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 3:05:32 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 3:43:08 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 3:43:54 PM 	 INSUFFICIENT FUNDS: Mountain Melter C3 	 $0.00 	 $0.00
+2/7/2021 3:49:22 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 3:49:46 PM 	 INSUFFICIENT FUNDS: Potato Crisps A1 	 $0.00 	 $0.00
+2/7/2021 7:04:01 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 7:05:01 PM 	 INSUFFICIENT FUNDS: Cowtales B2 	 $0.00 	 $0.00
