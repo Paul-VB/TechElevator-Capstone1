@@ -21,6 +21,7 @@ namespace Capstone.Models
         /// The prefix to prepend to all the file paths.
         /// </summary>
         const string FILE_PATH_PREFIX = @"..\..\..\..\";
+        //const string FILE_PATH_PREFIX = @".\";
 
         /// <summary>
         /// The default path to the CSV file that holds the info on what items and prices to restock the machine with
