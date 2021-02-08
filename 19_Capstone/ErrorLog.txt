@@ -26,3 +26,10 @@
 2/7/2021 11:34:11 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
 2/7/2021 11:34:11 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
 2/7/2021 11:34:11 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 $0.00
+2/7/2021 11:35:21 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 11:37:41 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/7/2021 11:38:41 PM 	 INSUFFICIENT FUNDS: Potato Crisps A1 	 $0.00 	 $0.00
+2/7/2021 11:38:48 PM 	 INSUFFICIENT FUNDS: Potato Crisps A1 	 $0.00 	 $0.00
+2/7/2021 11:39:34 PM 	 ITEM SOLD OUT: B3 	 $32.50 	 $32.50
+2/7/2021 11:39:37 PM 	 ITEM SOLD OUT: B3 	 $32.50 	 $32.50
+2/7/2021 11:51:48 PM 	 READ STOCK FILE 	 $0.00 	 $0.00

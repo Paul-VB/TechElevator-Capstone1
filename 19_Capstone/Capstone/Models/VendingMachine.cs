@@ -405,6 +405,11 @@ namespace Capstone.Models
         /// <param name="salesReportLines">The sales report lines.</param>
         public void WriteSalesReportToFile(List<string> salesReportLines)
         {
+            //check if the sales report subfolder exists
+            if (!Directory.Exists(Path.GetFullPath(FILE_PATH_PREFIX + SALES_REPORTS_FOLDER)))
+            {
+                Directory.CreateDirectory(Path.GetFullPath(FILE_PATH_PREFIX + SALES_REPORTS_FOLDER));
+            }
             //create a new file path that includes the current datetime, so each sales report is unique
             string folderFriendlyDateStamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
             string salesReportFullPath = Path.GetFullPath(Path.Combine(FILE_PATH_PREFIX+SALES_REPORTS_FOLDER, folderFriendlyDateStamp + "-SalesReport.txt"));
