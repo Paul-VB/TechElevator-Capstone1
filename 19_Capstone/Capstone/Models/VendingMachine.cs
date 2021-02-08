@@ -344,7 +344,6 @@ namespace Capstone.Models
         private void LogToFile(string pathOfFile, string eventDescription, decimal startCredit, decimal endCredit)
         {
             string logFileFullPath = Path.GetFullPath(FILE_PATH_PREFIX+pathOfFile);
-            Console.WriteLine($"logging to file{logFileFullPath}");
             bool successfulLogWrite = false;
             while (!successfulLogWrite)
             {
