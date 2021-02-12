@@ -33,3 +33,24 @@
 2/7/2021 11:39:34 PM 	 ITEM SOLD OUT: B3 	 $32.50 	 $32.50
 2/7/2021 11:39:37 PM 	 ITEM SOLD OUT: B3 	 $32.50 	 $32.50
 2/7/2021 11:51:48 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 INSUFFICIENT FUNDS: Big Chew B2 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 ITEM SOLD OUT: B1 	 $26.25 	 $26.25
+2/11/2021 3:52:24 PM 	 SLOT NOT FOUND: Z9 	 $100.00 	 $100.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: the category in the stock file may have been misspelled 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is there the correct number of vertical bars in the line? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: Is the price an actual number? 	 $0.00 	 $0.00
+2/11/2021 3:52:24 PM 	 BAD STOCK FILE LINE: (this really shouldn't be possible, but the stock file line was null) 	 $0.00 	 $0.00
+2/11/2021 3:52:28 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/11/2021 4:22:12 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/11/2021 4:24:02 PM 	 SLOT NOT FOUND: HFDSJKAFHL 	 $0.00 	 $0.00
+2/11/2021 4:24:09 PM 	 INSUFFICIENT FUNDS: Potato Crisps A1 	 $0.00 	 $0.00
+2/11/2021 4:24:20 PM 	 INSUFFICIENT FUNDS: Potato Crisps A1 	 $0.00 	 $0.00
+2/11/2021 4:26:49 PM 	 ITEM SOLD OUT: A1 	 $42.75 	 $42.75
+2/11/2021 4:28:14 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/11/2021 5:54:45 PM 	 READ STOCK FILE 	 $0.00 	 $0.00
+2/12/2021 9:53:47 AM 	 READ STOCK FILE 	 $0.00 	 $0.00
